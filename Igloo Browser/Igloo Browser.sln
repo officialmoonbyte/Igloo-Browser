@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27428.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Igloo Browser", "Igloo Browser\Igloo Browser.csproj", "{E85C7382-A0D7-40A2-BA09-8827C131F753}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Installer", "Installer\Installer.csproj", "{D135F064-317F-40AD-AF9D-7898A265494A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{E85C7382-A0D7-40A2-BA09-8827C131F753}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E85C7382-A0D7-40A2-BA09-8827C131F753}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E85C7382-A0D7-40A2-BA09-8827C131F753}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D135F064-317F-40AD-AF9D-7898A265494A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D135F064-317F-40AD-AF9D-7898A265494A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D135F064-317F-40AD-AF9D-7898A265494A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D135F064-317F-40AD-AF9D-7898A265494A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
