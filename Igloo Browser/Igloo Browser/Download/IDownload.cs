@@ -1,4 +1,9 @@
-﻿namespace Igloo.Download
+﻿using GlobalSettingsFramework;
+using System;
+using System.IO;
+using System.Net;
+
+namespace Igloo.Download
 {
     /// <summary>
     /// A class webclient, used to process and download files.

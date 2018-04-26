@@ -1,4 +1,9 @@
-﻿namespace Igloo.Engines
+﻿using Igloo.Events;
+using IndieGoat.MaterialFramework.Controls;
+using System;
+using System.Drawing;
+
+namespace Igloo.Engines
 {
     //Interface for the browser.
     public interface BrowserEngineInterface

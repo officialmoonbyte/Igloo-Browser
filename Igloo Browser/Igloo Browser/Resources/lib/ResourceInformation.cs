@@ -1,4 +1,7 @@
-﻿namespace Igloo.Resources.lib
+﻿using IndieGoat.InideClient.Default;
+using System;
+
+namespace Igloo.Resources.lib
 {
     public static class ResourceInformation
     {

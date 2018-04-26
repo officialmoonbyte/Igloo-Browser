@@ -1,4 +1,7 @@
-﻿namespace Igloo.Engines.CefSharp.Lib
+﻿using CefSharp;
+using Igloo.Logger;
+
+namespace Igloo.Engines.CefSharp.Lib
 {
     public class DownloadHandler : IDownloadHandler
     {
@@ -16,7 +19,7 @@
         public void OnBeforeDownload(IBrowser browser, DownloadItem downloadItem, IBeforeDownloadCallback callback)
         {
             //Add a item to the custom DownloadHandler
-            Networking.Settings.downloadItem.AddDownloadItem(downloadItem.Url, downloadItem.SuggestedFileName);
+            Settings.Settings.downloadItem.AddDownloadItem(downloadItem.Url, downloadItem.SuggestedFileName);
             ILogger.AddToLog("CEF IDownloadHandler", "Downloading : " + downloadItem.Url);
         }
 

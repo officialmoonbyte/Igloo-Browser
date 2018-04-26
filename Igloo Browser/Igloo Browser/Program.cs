@@ -1,7 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using CefSharp;
+using Igloo.DNS;
+using Igloo.Engines.CefSharp.Lib;
+using Igloo.History;
+using Igloo.Logger;
+using Igloo.Pages.Browser;
+using IndieGoat.InideClient.Default;
+using IndieGoat.Net.SSH;
+using Renci.SshNet.Common;
+using System;
+using System.Diagnostics;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Igloo
@@ -114,8 +125,8 @@ namespace Igloo
                 ILogger.AddToLog("DynUpdater", "Initialized DYNUpdater on port 5750.");
 
                 //Connects to the Universal server
-                Networking.Settings.UniversalConnection = new IndieClient();
-                Networking.Settings.UniversalConnection.ConnectToRemoteServer("localhost", 2445);
+                Settings.Settings.UniversalConnection = new IndieClient();
+                Settings.Settings.UniversalConnection.ConnectToRemoteServer("localhost", 2445);
                 ILogger.AddToLog("Indie Client", "Connected to host localhost:2445");
 
             })); sshThread.Start();

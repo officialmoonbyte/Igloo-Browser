@@ -1,4 +1,12 @@
-﻿namespace Igloo.Pages.Browser
+﻿using Igloo.Control.Browser;
+using IndieGoat.MaterialFramework.Controls;
+using IndieGoat.MaterialFramework.Events;
+using System;
+using System.Drawing;
+using System.Threading;
+using System.Windows.Forms;
+
+namespace Igloo.Pages.Browser
 {
     public partial class BrowserWindow : MaterialForm
     {

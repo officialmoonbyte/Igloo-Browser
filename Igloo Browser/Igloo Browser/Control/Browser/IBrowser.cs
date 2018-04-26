@@ -1,8 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CefSharp.WinForms;
+using Igloo.Download;
+using Igloo.Engines;
+using Igloo.Engines.CefSharp.Lib;
+using Igloo.Engines.GeckoFx;
+using Igloo.Events;
+using Igloo.Pages.Settings;
+using Igloo.Settings;
+using IndieGoat.MaterialFramework.Controls;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Igloo.Control.Browser
 {
@@ -15,16 +22,16 @@ namespace Igloo.Control.Browser
         public MaterialTabPage tabPage = new MaterialTabPage();
 
         //Download handler for the Browser
-        DownloadRequest p_DownloadItem = Networking.Settings.downloadItem;
+        DownloadRequest p_DownloadItem = Settings.Settings.downloadItem;
 
         //Host control for the IBrowser Control
         Panel pnl = new Panel();
 
         //Header of the browser.
-        Crash.Control.Browser.IBrowserHeader BrowserHeader;
+        Igloo.Control.Browser.IBrowserHeader BrowserHeader;
 
         //Browser Class
-        MoonBrowserControl browser;
+        BrowserEngineInterface browser;
 
         public enum BrowserType { CefSharp, Gecko }
 
@@ -51,7 +58,7 @@ namespace Igloo.Control.Browser
             //tabPage.ChangeTabIcon(Image.FromFile(Application.StartupPath + "\\settingslogo.ico"));
 
             // BrowserHandler //
-            BrowserHeader = new Crash.Control.Browser.IBrowserHeader(defaultSize.Width);
+            BrowserHeader = new Igloo.Control.Browser.IBrowserHeader(defaultSize.Width);
             BrowserHeader.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
             BrowserHeader.Location = new Point(0, 0);
 

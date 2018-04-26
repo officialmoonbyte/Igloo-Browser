@@ -1,4 +1,14 @@
-﻿namespace Igloo.Engines.CefSharp.Lib
+﻿using CefSharp;
+using CefSharp.WinForms;
+using CefSharp.WinForms.Internals;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Net;
+using System.Windows.Forms;
+
+namespace Igloo.Engines.CefSharp.Lib
 {
     /// <summary>
     /// Used for CEFSharp Display Handler
@@ -15,12 +25,12 @@
         //Title for the browser.
         string title;
 
-        MoonBrowserControl instanceBrowser;
+        BrowserEngineInterface instanceBrowser;
 
         /// <summary>
         /// Used to set the IBrowserInstance
         /// </summary>
-        public DisplayHandler(MoonBrowserControl n)
+        public DisplayHandler(BrowserEngineInterface n)
         { instanceBrowser = n; }
 
         /// <summary>

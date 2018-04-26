@@ -1,4 +1,6 @@
-﻿namespace Igloo.Settings
+﻿using GlobalSettingsFramework;
+
+namespace Igloo.Settings
 {
     public class SettingsManager
     {

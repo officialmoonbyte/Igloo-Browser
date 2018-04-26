@@ -49,7 +49,7 @@ namespace Igloo.Control.BrowserButtons
             int Modif = 4;
 
             //Draw the image
-            g.DrawImage(Properties.Resources.Settings_icon, new Rectangle(ClientRectangle.X + Modif,
+            g.DrawImage(Properties.Resources.settingslogo.ToBitmap(), new Rectangle(ClientRectangle.X + Modif,
                 ClientRectangle.Y + Modif,
                 ClientRectangle.Width - (Modif * 2),
                 ClientRectangle.Height - (Modif * 2)));

@@ -1,4 +1,20 @@
-﻿namespace Igloo.Engines.CefSharp.Lib
+﻿using CefSharp;
+using CefSharp.WinForms;
+using CefSharp.WinForms.Internals;
+using Igloo.Events;
+using Igloo.History;
+using Igloo.Logger;
+using Igloo.Resources.lib;
+using Igloo.Settings;
+using IndieGoat.MaterialFramework.Controls;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using TheDuffman85.Tools;
+
+namespace Igloo.Engines.CefSharp.Lib
 {
     #region Startup Methods
 
@@ -83,7 +99,7 @@
 
     #endregion
 
-    public class CefSharpHandle : MoonBrowserControl
+    public class CefSharpHandle : BrowserEngineInterface
     {
         #region Vars
 

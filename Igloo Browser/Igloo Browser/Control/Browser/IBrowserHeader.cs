@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Igloo.Control.BrowserButtons;
+using IndieGoat.MaterialFramework.Controls;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Igloo.Control.Browser
 {

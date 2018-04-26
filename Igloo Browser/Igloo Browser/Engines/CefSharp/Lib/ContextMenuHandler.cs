@@ -1,4 +1,9 @@
-﻿namespace Igloo.Engines.CefSharp.Lib
+﻿using CefSharp;
+using IndieGoat.MaterialFramework.Controls;
+using System;
+using System.Windows.Forms;
+
+namespace Igloo.Engines.CefSharp.Lib
 {
     /// <summary>
     /// A context menu strip for the browser
@@ -56,7 +61,7 @@
                 MaterialTabControl basedTabControl = (MaterialTabControl)mainTabPage.Parent;
 
                 //Creating a new Tab
-                MaterialTabPage newTab = new Crash.Control.Browser.IBrowser().getIBrowserTab(parameters.LinkUrl, basedTabControl.Size);
+                MaterialTabPage newTab = new Igloo.Control.Browser.IBrowser().getIBrowserTab(parameters.LinkUrl, basedTabControl.Size);
 
                 //Inovke on UI thread
                 if (basedTabControl.InvokeRequired)

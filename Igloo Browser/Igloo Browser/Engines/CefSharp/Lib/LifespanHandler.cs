@@ -1,4 +1,8 @@
-﻿namespace Igloo.Engines.CefSharp.Lib
+﻿using CefSharp;
+using IndieGoat.MaterialFramework.Controls;
+using System;
+
+namespace Igloo.Engines.CefSharp.Lib
 {
     /// <summary>
     /// Used to open a popup in a new tab when asked
@@ -70,7 +74,7 @@
             MaterialTabControl basedTabControl = (MaterialTabControl)tabPage.Parent;
 
             //Creating a new Tab
-            MaterialTabPage newTab = new Crash.Control.Browser.IBrowser().getIBrowserTab(targetUrl, basedTabControl.Size);
+            MaterialTabPage newTab = new Igloo.Control.Browser.IBrowser().getIBrowserTab(targetUrl, basedTabControl.Size);
 
             //Inovke on UI thread
             if (basedTabControl.InvokeRequired)

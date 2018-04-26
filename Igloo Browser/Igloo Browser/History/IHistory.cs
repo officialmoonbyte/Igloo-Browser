@@ -1,4 +1,9 @@
-﻿namespace Igloo.History
+﻿using Igloo.Logger;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
+namespace Igloo.History
 {
     /// <summary>
     /// Highly based of of ILogger

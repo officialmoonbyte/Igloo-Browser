@@ -1,4 +1,7 @@
-﻿namespace Igloo.Settings
+﻿using Igloo.Download;
+using IndieGoat.InideClient.Default;
+
+namespace Igloo.Settings
 {
     public static class Settings
     {

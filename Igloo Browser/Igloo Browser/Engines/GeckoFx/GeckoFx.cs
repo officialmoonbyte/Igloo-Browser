@@ -1,4 +1,12 @@
-﻿namespace Igloo.Engines.GeckoFx
+﻿using Gecko;
+using Igloo.Events;
+using Igloo.History;
+using IndieGoat.MaterialFramework.Controls;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace Igloo.Engines.GeckoFx
 {
     #region Startup
 
@@ -17,7 +25,7 @@
 
     #endregion
 
-    public class Geckofx : MoonBrowserControl
+    public class Geckofx : BrowserEngineInterface
     {
 
         #region Vars

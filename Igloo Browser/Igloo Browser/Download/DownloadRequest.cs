@@ -1,4 +1,8 @@
-﻿namespace Igloo.Download
+﻿using GlobalSettingsFramework.Logger;
+using System;
+using System.Collections.Generic;
+
+namespace Igloo.Download
 {
     /// <summary>
     /// Used to process a new download item.
