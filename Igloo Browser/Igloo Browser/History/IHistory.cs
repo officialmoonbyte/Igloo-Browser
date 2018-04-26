@@ -1,4 +1,5 @@
 ﻿using Igloo.Logger;
+using Igloo.Resources.lib;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -37,11 +38,13 @@ namespace Igloo.History
         /// </summary>
         public static void WriteHistory()
         {
+            string CacheDirectory = @"C:\MoonByte\" + ResourceInformation.ApplicationName + @" Cache\History.hit";
+
             //If History.hit file does not exist, create the file.
-            if (!File.Exists(@"C:\VortexStudio\Boomerang Browser Cache\History.hit")) File.Create(@"C:\VortexStudio\Boomerang Browser Cache\History.hit").Close();
+            if (!File.Exists(CacheDirectory)) File.Create(CacheDirectory).Close();
 
             //Read all of the lines of the History.hit file.
-            File.WriteAllLines(@"C:\VortexStudio\Boomerang Browser Cache\History.hit", History);
+            File.WriteAllLines(CacheDirectory, History);
             ILogger.AddToLog("IHistory", "Wrote all history values to History.hit");
         }
 
@@ -50,11 +53,13 @@ namespace Igloo.History
         /// </summary>
         public static void LoadFromFile()
         {
+            string CacheDirectory = @"C:\MoonByte\" + ResourceInformation.ApplicationName + @" Cache\History.hit";
+
             //If History.hit file does not exist, create the file.
-            if (!File.Exists(@"C:\VortexStudio\Boomerang Browser Cache\History.hit")) File.Create(@"C:\VortexStudio\Boomerang Browser Cache\History.hit").Close();
+            if (!File.Exists(CacheDirectory)) File.Create(CacheDirectory).Close();
 
             //Read all of the lines of the History.hit file
-            History = File.ReadAllLines(@"C:\VortexStudio\Boomerang Browser Cache\History.hit").ToList();
+            History = File.ReadAllLines(CacheDirectory).ToList();
             ILogger.AddToLog("IHistory", "Finished initializing history!");
         }
     }

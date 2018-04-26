@@ -1,4 +1,5 @@
 ﻿using Igloo.Control.Browser;
+using Igloo.Resources.lib;
 using IndieGoat.MaterialFramework.Controls;
 using IndieGoat.MaterialFramework.Events;
 using System;
@@ -45,7 +46,7 @@ namespace Igloo.Pages.Browser
             this.Showicon = false;
             this.ShowTitleLabel = false;
             this.Icon = new Icon(Application.StartupPath + @"\icon.ico");
-            this.Text = "Crash";
+            this.Text = ResourceInformation.ApplicationName;
 
             base.OnLoad(e);
 

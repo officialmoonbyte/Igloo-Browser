@@ -1,6 +1,7 @@
 ﻿using CefSharp;
 using CefSharp.WinForms;
 using CefSharp.WinForms.Internals;
+using Igloo.Resources.lib;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -68,7 +69,7 @@ namespace Igloo.Engines.CefSharp.Lib
         public void OnFaviconUrlChange(IWebBrowser browserControl, IBrowser browser, IList<string> urls)
         {
             //Gets the tmp Path to store all of the icons.
-            string tmpPath = Path.GetTempPath() + @"VortexStudio\BoomerangBrowser\";
+            string tmpPath = Path.GetTempPath() + @"MoonByte\" + ResourceInformation.ApplicationName;
 
             //Sets ttl to title.
             string ttl = title;
@@ -85,7 +86,7 @@ namespace Igloo.Engines.CefSharp.Lib
                 }
 
                 //Setting the HistoryIconDirectory
-                string historyIconDirectory = @"C:\VortexStudio\Boomerang Browser Cache\HIcons\";
+                string historyIconDirectory = @"C:\VortexStudio\" + ResourceInformation.ApplicationName + @" Cache\HIcons\";
 
                 //Checking if History Icon Directory exist, if not creates the directory.
                 if (!Directory.Exists(historyIconDirectory)) Directory.CreateDirectory(historyIconDirectory);
@@ -172,7 +173,7 @@ namespace Igloo.Engines.CefSharp.Lib
         public void OnTitleChanged(IWebBrowser browserControl, TitleChangedEventArgs titleChangedArgs)
         {
             //Initialize temp path
-            string tmpPath = Path.GetTempPath() + @"VortexStudio\BoomerangBrowser\";
+            string tmpPath = Path.GetTempPath() + @"MooonByte\" + ResourceInformation.ApplicationName;
 
             try
             {

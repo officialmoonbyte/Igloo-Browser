@@ -4,6 +4,7 @@ using Igloo.Engines.CefSharp.Lib;
 using Igloo.History;
 using Igloo.Logger;
 using Igloo.Pages.Browser;
+using Igloo.Resources.lib;
 using IndieGoat.InideClient.Default;
 using IndieGoat.Net.SSH;
 using Renci.SshNet.Common;
@@ -54,20 +55,20 @@ namespace Igloo
             //Tries to see if the process is open
             try
             {
-                //Gets the list of processes with Crash and then write that process in memory
-                Process openCrashprocess; Process[] processList = Process.GetProcessesByName("Crash");
-                openCrashprocess = processList[0];
+                //Gets the list of processes with browser and then write that process in memory
+                Process openBrowserProcess; Process[] processList = Process.GetProcessesByName(ResourceInformation.ApplicationName);
+                openBrowserProcess = processList[0];
 
                 //Checks if the process is equal to null
-                if (openCrashprocess != null)
+                if (openBrowserProcess != null)
                 {
-                    ILogger.AddToLog("Crash", "Detected another instance of Crash open, connecting to tcp server.");
+                    ILogger.AddToLog(ResourceInformation.ApplicationName, "Detected another instance of the browser open, connecting to tcp server.");
 
                     //Sets up a new client and connect to the local server
                     TcpClient client = new TcpClient();
                     client.Connect("localhost", 6189);
 
-                    ILogger.AddToLog("Crash", "Connection established");
+                    ILogger.AddToLog(ResourceInformation.ApplicationName, "Connection established");
 
                     //Send a command to make a new window
                     if (client.Connected) client.Client.Send(Encoding.UTF8.GetBytes("newpage"));
@@ -84,7 +85,7 @@ namespace Igloo
             if (!CheckInternet.CheckForInternetConnection())
             {
                 ILogger.AddToLog("ERROR", "Connection to the internet was not found!");
-                MessageBox.Show("Connection to the internet was not found! Crash is currently closing.", "Crash Browser", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Connection to the internet was not found! thi sbrowser is currently closing.", ResourceInformation.ApplicationName, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
             }
 
@@ -145,7 +146,7 @@ namespace Igloo
             Stripe.StripeConfiguration.SetApiKey("sk_live_gTIkgQoj5jZGrpGJ7vj3x4Mt");
             ILogger.AddToLog("Stripe", "Instalization complete!");
 
-            ILogger.AddToLog("Boomerang Browser", "Running main form now!");
+            ILogger.AddToLog(ResourceInformation.ApplicationName, "Running main form now!");
 
             //Declaring new BrowserWindow
             BrowserWindow browser = new BrowserWindow();
@@ -167,7 +168,7 @@ namespace Igloo
                     Cef.Shutdown();
 
                     //Logging
-                    ILogger.AddToLog("Crash", "Detected no forms open. Closing application.");
+                    ILogger.AddToLog(ResourceInformation.ApplicationName, "Detected no forms open. Closing application.");
 
                     //Exit out of the application
                     Environment.Exit(1);
@@ -185,7 +186,7 @@ namespace Igloo
         /// </summary>
         private static void Application_ApplicationExit(object sender, EventArgs e)
         {
-            ILogger.AddToLog("Crash", "Closing browser through application exit."); Console.WriteLine("Closing application");
+            ILogger.AddToLog(ResourceInformation.ApplicationName, "Closing browser through application exit."); Console.WriteLine("Closing application");
             ILogger.WriteLog();
             IHistory.WriteHistory();
         }

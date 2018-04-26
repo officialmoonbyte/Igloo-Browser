@@ -5,6 +5,7 @@ using Igloo.Engines.CefSharp.Lib;
 using Igloo.Engines.GeckoFx;
 using Igloo.Events;
 using Igloo.Pages.Settings;
+using Igloo.Resources.lib;
 using Igloo.Settings;
 using IndieGoat.MaterialFramework.Controls;
 using System;
@@ -124,7 +125,7 @@ namespace Igloo.Control.Browser
 
                 //Creating a new MaterialTabPage and adding the form as a control
                 MaterialTabPage settingsTab = new MaterialTabPage();
-                settingsTab.Text = "Boomerang Settings";
+                settingsTab.Text = ResourceInformation.ApplicationName + " Settings";
                 settingsTab.Controls.Add(settings);
 
                 //Add MaterialTabPage to the TabControl and select that tab

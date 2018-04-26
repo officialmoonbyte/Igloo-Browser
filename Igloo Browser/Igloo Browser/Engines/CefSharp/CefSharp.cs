@@ -35,7 +35,7 @@ namespace Igloo.Engines.CefSharp.Lib
         private static CefSettings GetCefSettings()
         {
             //Getting the Cache directory
-            string CacheDirectory = @"C:\VortexStudio\Crash Browser Cache\";
+            string CacheDirectory = @"C:\MoonByte\" + ResourceInformation.ApplicationName + @" Cache\";
 
             // CEFSharp - Editing settings and browser Cache with CEFSHARP //
             cfSettings = new CefSettings();
@@ -212,7 +212,7 @@ namespace Igloo.Engines.CefSharp.Lib
             Image iconIco = Favicon.GetFromUrl(args.Address).Icon;
 
             //Gets the tmp Path to store all of the icons.
-            string tmpPath = Path.GetTempPath() + @"VortexStudio\BoomerangBrowser\";
+            string tmpPath = Path.GetTempPath() + @"MoonByte\" + ResourceInformation.ApplicationName + @"\";
 
             mainTabPage.ChangeTabIcon(iconIco);
 
