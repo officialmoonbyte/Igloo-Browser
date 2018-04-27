@@ -1,6 +1,7 @@
 ﻿using CefSharp;
 using Igloo.DNS;
 using Igloo.Engines.CefSharp.Lib;
+using Igloo.Engines.GeckoFx;
 using Igloo.History;
 using Igloo.Logger;
 using Igloo.Pages.Browser;
@@ -153,6 +154,9 @@ namespace Igloo
             //Initialize CefSharp
             VoidCef.InitializeCefSharp();
 
+            //Initialize GeckoFx
+            VoidGecko.InitializeGecko();
+
             //Set the IP and PORT of the Proxy Server
             string ip = "localhost";
             int iport = 5567;
@@ -173,23 +177,30 @@ namespace Igloo
             browser.Show();
 
             //Setting up the timer
-            System.Windows.Forms.Timer closeTimer = new System.Windows.Forms.Timer();
-            closeTimer.Tick += ((obj, args) =>
+            new Thread(new ThreadStart(() =>
             {
-                //If there are no open forms, close the application.
-                if (Application.OpenForms.Count == 1)
+                while (true)
                 {
-                    
-                    //Shutdown CEF process
-                    Cef.Shutdown();
+                    //If there are no open forms, close the application.
+                    if (Application.OpenForms.Count == 1)
+                    {
+                        //Shutdown CEF process
+                        InvokeOnUI.Invoke(new Action(() =>
+                        {
+                            Cef.Shutdown();
 
-                    //Logging
-                    ILogger.AddToLog(ResourceInformation.ApplicationName, "Detected no forms open. Closing application.");
+                            //Logging
+                            ILogger.AddToLog(ResourceInformation.ApplicationName, "Detected no forms open. Closing application.");
 
-                    //Exit out of the application
-                    Environment.Exit(1);
+                            //Exit out of the application
+                            Environment.Exit(1);
+                        }));
+                    }
+
+                    //Waits for 5 seconds
+                    Thread.Sleep(2500);
                 }
-            }); closeTimer.Start();
+            })).Start();
 
             //Running the application loop.
             Application.Run();

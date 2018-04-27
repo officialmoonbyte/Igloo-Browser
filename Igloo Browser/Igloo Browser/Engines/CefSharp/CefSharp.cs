@@ -68,9 +68,9 @@ namespace Igloo.Engines.CefSharp.Lib
 
             //NOTE: The following function will set all three params
             //cfSettings.SetOffScreenRenderingBestPerformanceArgs();
-            EditCefCommandLine("disable-gpu", "1");
-            EditCefCommandLine("disable-gpu-compositing", "1");
-            EditCefCommandLine("enable-begin-frame-scheduling", "1");
+            //EditCefCommandLine("disable-gpu", "1");
+            //EditCefCommandLine("disable-gpu-compositing", "1");
+            //EditCefCommandLine("enable-begin-frame-scheduling", "1");
 
             //EditCefCommandLine("disable-gpu-vsync", "1");
 

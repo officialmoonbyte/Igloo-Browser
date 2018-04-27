@@ -83,7 +83,7 @@ namespace Igloo.Pages.Browser
             // Tabpage //
             if (draggedTab == null)
             {
-                MaterialTabPage tabPage = new IBrowser().getIBrowserTab(IBrowser.BrowserType.CefSharp, "https://www.google.com/", tabControl.Size);
+                MaterialTabPage tabPage = new IBrowser().getIBrowserTab(IBrowser.BrowserType.Gecko, "https://www.google.com/", tabControl.Size);
                 tabControl.TabPages.Add(tabPage);
             }
             else
@@ -92,16 +92,15 @@ namespace Igloo.Pages.Browser
             }
 
             //Tabcontrol events
-            System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
-            timer.Tick += (obj, args) =>
+            new Thread(new ThreadStart(() =>
             {
-                Thread thread = new Thread(new ThreadStart(() =>
+                while (true)
                 {
-                    if (tabControl.TabPages.Count == 0) { this.Close(); } //Closes the browser window when tabpages is equal to 0
-                    Thread.Sleep(1000);
-                })); thread.Start();
-            };
-            timer.Start();
+                    Console.WriteLine(tabControl.TabPages.Count);
+                    if (tabControl.TabPages.Count == 0) { Program.InvokeOnUI.Invoke(new Action(() => { this.Close(); })); }
+                    Thread.Sleep(2000);
+                }
+            })).Start();
 
             this.Controls.Add(tabControl);
         }
