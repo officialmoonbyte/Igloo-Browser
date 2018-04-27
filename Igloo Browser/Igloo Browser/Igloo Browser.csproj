@@ -184,7 +184,6 @@
     <Compile Include="Resources\lib\ResourceInformation.cs" />
     <Compile Include="Server\Server.cs" />
     <Compile Include="Server\ServerClient.cs" />
-    <Compile Include="Settings.cs" />
     <Compile Include="Settings\NetworkSettings.cs" />
     <Compile Include="Settings\SettingsManager.cs" />
     <Compile Include="Settings\UserAgents.cs" />

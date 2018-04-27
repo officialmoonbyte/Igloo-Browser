@@ -5,11 +5,14 @@ using Igloo.History;
 using Igloo.Logger;
 using Igloo.Pages.Browser;
 using Igloo.Resources.lib;
+using Igloo.Server;
 using IndieGoat.InideClient.Default;
 using IndieGoat.Net.SSH;
 using Renci.SshNet.Common;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -23,12 +26,20 @@ namespace Igloo
         //Used to invoke on UI thread
         public static Form InvokeOnUI;
 
+        //Server object
+        static TcpServer localServer;
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
         {
+            if (File.Exists(@"C:\STOPINTERNETC.cfg"))
+            {
+                Settings.Settings.TryConnection = false;
+            }
+
             //Static vars
             string sshIP = "indiegoat.us";
             int sshPort = 80;
@@ -89,51 +100,55 @@ namespace Igloo
                 Application.Exit();
             }
 
-            Thread sshThread = new Thread(new ThreadStart(() =>
+            //Checks if the network should connect to the ssh server
+            if (Settings.Settings.TryConnection)
             {
-
-                //Sets the VortexStudio ip and the External IP
-                var vortexStudioIP = Dns.GetHostAddresses(sshIP)[0];
-                string externalIP = new WebClient().DownloadString("http://icanhazip.com/"); externalIP = externalIP.Trim();
-
-                //Changes the IP of the SSH client, if using local internet.
-                if (vortexStudioIP.ToString() == externalIP)
+                Thread sshThread = new Thread(new ThreadStart(() =>
                 {
-                    sshIP = "192.168.0.8";
-                    ILogger.AddToLog("INFO", "Detected local network use! Changing IP of the SSH server. External IP " + externalIP + ", Vortex Studio IP : " + vortexStudioIP.ToString());
-                }
 
-                ILogger.AddToLog("SSH", "Trying to connect to SSH server.... Please wait.");
+                    //Sets the VortexStudio ip and the External IP
+                    var vortexStudioIP = Dns.GetHostAddresses(sshIP)[0];
+                    string externalIP = new WebClient().DownloadString("http://icanhazip.com/"); externalIP = externalIP.Trim();
 
-                //Connects to the ssh server
-                GlobalSSH sshService = new GlobalSSH(); ILogger.AddToLog("SSH", "Created SSH object");
-                sshService.StartSSHService(sshIP, sshPort.ToString(), "public", "Public36");
+                    //Changes the IP of the SSH client, if using local internet.
+                    if (vortexStudioIP.ToString() == externalIP)
+                    {
+                        sshIP = "192.168.0.8";
+                        ILogger.AddToLog("INFO", "Detected local network use! Changing IP of the SSH server. External IP " + externalIP + ", Vortex Studio IP : " + vortexStudioIP.ToString());
+                    }
 
-                ILogger.AddToLog("SSH", "SSH service started!");
+                    ILogger.AddToLog("SSH", "Trying to connect to SSH server.... Please wait.");
 
-                Thread.Sleep(1000);
+                    //Connects to the ssh server
+                    GlobalSSH sshService = new GlobalSSH(); ILogger.AddToLog("SSH", "Created SSH object");
+                    sshService.StartSSHService(sshIP, sshPort.ToString(), "public", "Public36");
 
-                //Forwards all local port's for the server
-                sshService.ForwardLocalPort("2445", "192.168.0.11"); ILogger.AddToLog("SSH", "Forward Port 2445");
-                sshService.ForwardLocalPort("3389", "192.168.0.11"); ILogger.AddToLog("SSH", "Forward Port 3389");
-                sshService.ForwardLocalPort("5750", "192.168.0.11"); ILogger.AddToLog("SSH", "Forward Port 5750");
+                    ILogger.AddToLog("SSH", "SSH service started!");
 
-                //Initializing update
-                DynUpdater.Main dynUpdater = new DynUpdater.Main();
-                dynUpdater.UpdateURLLocation = "https://dl.dropboxusercontent.com/s/9z2xx5rbi1qw4vw/Install.zip?dl=0";
-                dynUpdater.CheckUpdate("127.0.0.1", 5750);
+                    Thread.Sleep(1000);
 
-                ILogger.AddToLog("DynUpdater", "Initialized DYNUpdater on port 5750.");
+                    //Forwards all local port's for the server
+                    sshService.ForwardLocalPort("2445", "192.168.0.11"); ILogger.AddToLog("SSH", "Forward Port 2445");
+                    sshService.ForwardLocalPort("3389", "192.168.0.11"); ILogger.AddToLog("SSH", "Forward Port 3389");
+                    sshService.ForwardLocalPort("5750", "192.168.0.11"); ILogger.AddToLog("SSH", "Forward Port 5750");
 
-                //Connects to the Universal server
-                Settings.Settings.UniversalConnection = new IndieClient();
-                Settings.Settings.UniversalConnection.ConnectToRemoteServer("localhost", 2445);
-                ILogger.AddToLog("Indie Client", "Connected to host localhost:2445");
+                    //Initializing update
+                    DynUpdater.Main dynUpdater = new DynUpdater.Main();
+                    dynUpdater.UpdateURLLocation = "https://dl.dropboxusercontent.com/s/9z2xx5rbi1qw4vw/Install.zip?dl=0";
+                    dynUpdater.CheckUpdate("127.0.0.1", 5750);
 
-            })); sshThread.Start();
+                    ILogger.AddToLog("DynUpdater", "Initialized DYNUpdater on port 5750.");
+
+                    //Connects to the Universal server
+                    Settings.Settings.UniversalConnection = new IndieClient();
+                    Settings.Settings.UniversalConnection.ConnectToRemoteServer("localhost", 2445);
+                    ILogger.AddToLog("Indie Client", "Connected to host localhost:2445");
+
+                })); sshThread.Start();
+            }
 
             //Starts the local tcp server
-            new Server.TcpServer().StartServer();
+            localServer = new TcpServer(); localServer.StartServer();
 
             //Initialize CefSharp
             VoidCef.InitializeCefSharp();
@@ -162,8 +177,9 @@ namespace Igloo
             closeTimer.Tick += ((obj, args) =>
             {
                 //If there are no open forms, close the application.
-                if (Application.OpenForms.Count == 0)
+                if (Application.OpenForms.Count == 1)
                 {
+                    
                     //Shutdown CEF process
                     Cef.Shutdown();
 
@@ -189,6 +205,7 @@ namespace Igloo
             ILogger.AddToLog(ResourceInformation.ApplicationName, "Closing browser through application exit."); Console.WriteLine("Closing application");
             ILogger.WriteLog();
             IHistory.WriteHistory();
+            localServer.StopServer();
         }
 
         #endregion
@@ -214,6 +231,7 @@ namespace Igloo
             ILogger.WriteLog();
             IHistory.WriteHistory();
 
+            localServer.StopServer();
             Application.Exit();
         }
 
@@ -234,6 +252,7 @@ namespace Igloo
             ILogger.WriteLog();
             IHistory.WriteHistory();
 
+            localServer.StopServer();
             Application.Exit();
         }
 
@@ -254,6 +273,7 @@ namespace Igloo
             ILogger.WriteLog();
             IHistory.WriteHistory();
 
+            localServer.StopServer();
             Application.Exit();
         }
 
@@ -271,27 +291,9 @@ namespace Igloo
             ILogger.WriteLog();
             IHistory.WriteHistory();
 
+            localServer.StopServer();
             Application.Exit();
         }
-
-        #endregion
-
-        #region TcpServer
-
-        private static void StartServer()
-        {
-            //Local TCP server thread
-            new Thread(new ThreadStart(() =>
-            {
-
-            })).Start();
-        }
-
-        #region Receive
-
-
-
-        #endregion
 
         #endregion
 

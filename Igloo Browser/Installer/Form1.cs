@@ -65,6 +65,8 @@ namespace Installer
 
             cek_Layer3_Desktop.Checked = true;
             cek_Layer3_StartMenu.Checked = true;
+            lbl_Layer1_Title.Text = "Igloo - Application Installer";
+            btn_Layer1_Next.Text = "Continue with Igloo Install";
 
             Console.WriteLine("Width : " + this.Width + ", Height : " + this.Height);
             Console.WriteLine("Calc point 1 : " + new Point((this.Width / 2) - ((btn_Layer3_FinishButton.Width / 2))));
@@ -288,9 +290,9 @@ namespace Installer
         public void CreateShortcut(string ShortcutDirectory)
         {
             var wsh = new IWshShell_Class();
-            IWshShortcut shortcut = wsh.CreateShortcut(ShortcutDirectory + "\\Crash.lnk") as IWshRuntimeLibrary.IWshShortcut;
+            IWshShortcut shortcut = wsh.CreateShortcut(ShortcutDirectory + "\\Igloo.lnk") as IWshRuntimeLibrary.IWshShortcut;
             shortcut.Arguments = "";
-            shortcut.TargetPath = installer.DefaultDirectory + @"\Crash.exe";
+            shortcut.TargetPath = installer.DefaultDirectory + @"\Igloo Browser.exe";
             // not sure about what this is for
             shortcut.WindowStyle = 1;
             shortcut.Description = "A web browser made by MoonByte";

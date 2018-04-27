@@ -13,8 +13,8 @@ namespace Installer
 
         public string TempDirectory = Path.GetTempPath();
         public string ZipName = "install.zip";
-        public string DefaultDirectory = @"C:\MoonByte\Crash\";
-        public string DownloadURL = "https://dl.dropboxusercontent.com/s/3c58k3wvhw4aejw/Install.zip?dl=0";
+        public string DefaultDirectory = @"C:\MoonByte\Igloo\";
+        public string DownloadURL = "https://dl.dropbox.com/s/925oa8tnpif1lmy/Install.zip?dl=0";
 
         public MaterialProgressBar InstallProgressBar;
         public MaterialProgressBar DownloadProgressBar;
@@ -36,7 +36,7 @@ namespace Installer
         /// Initialize the installer class, setting a url if needed.
         /// </summary>
         /// <param name="Downloadurl">URL to be downloaded</param>
-        public Installer(string Downloadurl = "https://dl.dropboxusercontent.com/s/3c58k3wvhw4aejw/Install.zip?dl=0")
+        public Installer(string Downloadurl = "https://dl.dropbox.com/s/925oa8tnpif1lmy/Install.zip?dl=0")
         { DownloadURL = Downloadurl; }
 
         #endregion Initialization

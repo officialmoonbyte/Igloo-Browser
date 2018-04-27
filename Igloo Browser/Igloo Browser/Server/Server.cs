@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Igloo.Logger;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
@@ -56,6 +57,15 @@ namespace Igloo.Server
                     catch { }
                 }
             })).Start();
+        }
+
+        /// <summary>
+        /// Stops the server
+        /// </summary>
+        public void StopServer()
+        {
+            ILogger.AddToLog("TCP Server", "Stopping listening on TCP server");
+            ServerListener.Stop();
         }
     }
 }

@@ -33,7 +33,7 @@ namespace Igloo.Pages.Browser
 
         protected override void OnLoad(EventArgs e)
         {
-
+            Console.WriteLine(true);
             if (StartMousePoint)
             {
                 Console.WriteLine(MousePosition);

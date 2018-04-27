@@ -11,5 +11,7 @@ namespace Igloo.Settings
 
         public static string RemoteIP;
         public static int RemotePort;
+
+        public static bool TryConnection = true;
     }
 }
