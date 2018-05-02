@@ -16,6 +16,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
@@ -45,6 +46,22 @@ namespace Igloo
             string sshIP = "indiegoat.us";
             int sshPort = 80;
 
+            //Checks if the application exist
+            var exists = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(Assembly.GetEntryAssembly().Location)).Length > 1;
+            if (exists)
+            {
+                ILogger.AddToLog(ResourceInformation.ApplicationName, "Detected another instance of the browser open! Sending client package and closing browser...");
+
+                //New TCP client to send data to local server
+                TcpClient client = new TcpClient(); client.Connect("localhost", 6189);
+                client.Client.Send(Encoding.UTF8.GetBytes("newpage"));
+
+                //Closing application and client
+                client.Close();
+                Application.Exit();
+                
+            }
+
             //Starting visual and text styles
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(true);
@@ -64,34 +81,6 @@ namespace Igloo
 
             ILogger.AddToLog("INFO", "Set handle's for all application exceptions's");
 
-            //Tries to see if the process is open
-            try
-            {
-                //Gets the list of processes with browser and then write that process in memory
-                Process openBrowserProcess; Process[] processList = Process.GetProcessesByName(ResourceInformation.ApplicationName);
-                openBrowserProcess = processList[0];
-
-                //Checks if the process is equal to null
-                if (openBrowserProcess != null)
-                {
-                    ILogger.AddToLog(ResourceInformation.ApplicationName, "Detected another instance of the browser open, connecting to tcp server.");
-
-                    //Sets up a new client and connect to the local server
-                    TcpClient client = new TcpClient();
-                    client.Connect("localhost", 6189);
-
-                    ILogger.AddToLog(ResourceInformation.ApplicationName, "Connection established");
-
-                    //Send a command to make a new window
-                    if (client.Connected) client.Client.Send(Encoding.UTF8.GetBytes("newpage"));
-
-                    Thread.Sleep(1000);
-
-                    //Closes the application
-                    Environment.Exit(1);
-                }
-            }
-            catch { }
 
             //Check if there is an active internet connection
             if (!CheckInternet.CheckForInternetConnection())
@@ -102,7 +91,7 @@ namespace Igloo
             }
 
             //Checks if the network should connect to the ssh server
-            if (Settings.Settings.TryConnection)
+            if (false)
             {
                 Thread sshThread = new Thread(new ThreadStart(() =>
                 {
@@ -134,9 +123,9 @@ namespace Igloo
                     sshService.ForwardLocalPort("5750", "192.168.0.11"); ILogger.AddToLog("SSH", "Forward Port 5750");
 
                     //Initializing update
-                    DynUpdater.Main dynUpdater = new DynUpdater.Main();
-                    dynUpdater.UpdateURLLocation = "https://dl.dropboxusercontent.com/s/9z2xx5rbi1qw4vw/Install.zip?dl=0";
-                    dynUpdater.CheckUpdate("127.0.0.1", 5750);
+                    //DynUpdater.Main dynUpdater = new DynUpdater.Main();
+                    //dynUpdater.UpdateURLLocation = "https://dl.dropboxusercontent.com/s/9z2xx5rbi1qw4vw/Install.zip?dl=0";
+                    //dynUpdater.CheckUpdate("127.0.0.1", 5750);
 
                     ILogger.AddToLog("DynUpdater", "Initialized DYNUpdater on port 5750.");
 
@@ -150,6 +139,7 @@ namespace Igloo
 
             //Starts the local tcp server
             localServer = new TcpServer(); localServer.StartServer();
+            ILogger.AddToLog(ResourceInformation.ApplicationName, "Finished initializing TCP Server.");
 
             //Initialize CefSharp
             VoidCef.InitializeCefSharp();
@@ -217,6 +207,7 @@ namespace Igloo
             ILogger.WriteLog();
             IHistory.WriteHistory();
             localServer.StopServer();
+            Application.Exit();
         }
 
         #endregion

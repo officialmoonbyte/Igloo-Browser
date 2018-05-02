@@ -43,5 +43,17 @@ namespace Igloo.Logger
                 File.WriteAllText(Application.StartupPath + "\\Log.log", Log);
             }
         }
+    
+        /// <summary>
+        /// Used to log any detected errors
+        /// </summary>
+        /// <param name="e"></param>
+        public static void LogException(Exception e)
+        {
+            ILogger.AddToLog("Exception", "Exception detected! Following details are in-listed below.");
+            ILogger.AddToLog("Exception Message", e.Message);
+            ILogger.AddToLog("Exception Stack", e.StackTrace);
+            ILogger.AddToLog("Exception", e.HelpLink);
+        }
     }
 }

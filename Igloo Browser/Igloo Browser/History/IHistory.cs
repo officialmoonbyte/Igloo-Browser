@@ -38,7 +38,7 @@ namespace Igloo.History
         /// </summary>
         public static void WriteHistory()
         {
-            string CacheDirectory = @"C:\MoonByte\" + ResourceInformation.ApplicationName + @" Cache\History.hit";
+            string CacheDirectory = @"C:\MoonByte\Igloo Cache\History.hit";
 
             //If History.hit file does not exist, create the file.
             if (!File.Exists(CacheDirectory)) File.Create(CacheDirectory).Close();

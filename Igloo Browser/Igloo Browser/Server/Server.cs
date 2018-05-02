@@ -1,4 +1,6 @@
 ﻿using Igloo.Logger;
+using Igloo.Resources.lib;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
@@ -9,6 +11,7 @@ namespace Igloo.Server
     public class TcpServer
     {
 
+        Thread ServerThreaded;
         TcpListener ServerListener;
         List<ServerClient> clientList = new List<ServerClient>();
 
@@ -33,12 +36,18 @@ namespace Igloo.Server
         /// </summary>
         private void ServerThread()
         {
-            //Starts the server
-            ServerListener = new TcpListener(IPAddress.Any, 6189);
-            ServerListener.Start();
+            try
+            {
+                //Starts the server
+                ServerListener = new TcpListener(IPAddress.Any, 6189);
+                ServerListener.Start();
+            } catch (SocketException e)
+            {
+                ILogger.AddToLog("Warning", "Could not start local TCP server on port 6189. Port is currently being used.");
+            }
 
             //Starts the client thread
-            new Thread(new ThreadStart(() =>
+            ServerThreaded = new Thread(new ThreadStart(() =>
             {
                 while (true)
                 {
@@ -56,7 +65,7 @@ namespace Igloo.Server
                     }
                     catch { }
                 }
-            })).Start();
+            })); ServerThreaded.Start();
         }
 
         /// <summary>
@@ -64,8 +73,17 @@ namespace Igloo.Server
         /// </summary>
         public void StopServer()
         {
-            ILogger.AddToLog("TCP Server", "Stopping listening on TCP server");
-            ServerListener.Stop();
+            try
+            {
+                ServerListener.Server.Shutdown(SocketShutdown.Both);
+            } catch (Exception e) { ILogger.AddToLog(ResourceInformation.ApplicationName, "Failed to shutdown server!"); ILogger.LogException(e); }
+            finally
+            {
+                ILogger.AddToLog("TCP Server", "Stopping listening on TCP server");
+
+                ServerListener.Server.Close(0);
+                ServerListener.Stop();
+            } ServerListener = null;
         }
     }
 }

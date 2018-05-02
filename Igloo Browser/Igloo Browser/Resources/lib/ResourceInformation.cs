@@ -8,7 +8,7 @@ namespace Igloo.Resources.lib
         public static string Username;
         public static string Password;
         public static DateTime ExpirationDate;
-        public static string ApplicationName = "Igloo";
+        public static string ApplicationName = "Igloo Browser";
 
         public static bool IsSubscribed = false;
         public static bool LoggedIn = false;

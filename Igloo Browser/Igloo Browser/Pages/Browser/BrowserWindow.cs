@@ -33,6 +33,7 @@ namespace Igloo.Pages.Browser
 
         protected override void OnLoad(EventArgs e)
         {
+
             Console.WriteLine(true);
             if (StartMousePoint)
             {
@@ -45,7 +46,7 @@ namespace Igloo.Pages.Browser
             this.HeaderColor = Color.FromArgb(35, 35, 64);
             this.Showicon = false;
             this.ShowTitleLabel = false;
-            this.Icon = new Icon(Application.StartupPath + @"\icon.ico");
+            //this.Icon = new Icon(Application.StartupPath + @"\icon.ico");
             this.Text = ResourceInformation.ApplicationName;
 
             base.OnLoad(e);
