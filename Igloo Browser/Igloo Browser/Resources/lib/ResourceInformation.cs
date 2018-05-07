@@ -16,5 +16,7 @@ namespace Igloo.Resources.lib
         public static bool VPNEnabled = false;
 
         public static IndieClient serverConnection = new IndieClient();
+
+        public static int GTTS = 2000; //GLOBAL THREAD TICK SPEED
     }
 }

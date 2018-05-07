@@ -114,7 +114,7 @@ namespace Igloo
                     sshService.StartSSHService(sshIP, sshPort.ToString(), "public", "Public36");
 
                     ILogger.AddToLog("SSH", "SSH service started!");
-
+                     
                     Thread.Sleep(1000);
 
                     //Forwards all local port's for the server

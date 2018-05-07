@@ -133,6 +133,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connection\Managed.cs" />
     <Compile Include="Control\BrowserButtons\BackButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
