@@ -95,9 +95,8 @@
       <HintPath>..\packages\GlobalSettingsFramework.1.0.3\lib\net45\GFS.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="GlobalSSH">
-      <HintPath>..\packages\GlobalSSH.1.0.1-Beta0\lib\net45\GlobalSSH.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="GlobalSSH, Version=2.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GlobalSSH.2.1.2\lib\net45\GlobalSSH.dll</HintPath>
     </Reference>
     <Reference Include="IndieClient">
       <HintPath>..\packages\IndieClient.1.0.5\lib\net45\IndieClient.dll</HintPath>
