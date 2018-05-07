@@ -44,6 +44,10 @@ namespace Igloo
             string sshIP = "indiegoat.us";
             int sshPort = 80;
 
+            //Starting visual and text styles
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(true);
+
             SetApplicationExceptions(); //Set for logging events when the application shuts down
 
             //Checks if the application exist
@@ -62,10 +66,6 @@ namespace Igloo
             }
 
             InitializeInvokeObject(); //Initialize the invoke object for the start of the application.
-
-            //Starting visual and text styles
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(true);
 
             //Check if there is an active internet connection
             if (!CheckInternet.CheckForInternetConnection())
@@ -145,7 +145,7 @@ namespace Igloo
         {
             //Starts the ssh connection task
             bool ConnectToSSH = true;
-            bool ConnectToDynUpdate = true;
+            bool ConnectToDynUpdate = false;
             bool ConnectToUniversalServer = true;
             new Thread(new ThreadStart(() => { new ServerConnections(ConnectToSSH, ConnectToDynUpdate, ConnectToUniversalServer); }));
         }
@@ -194,7 +194,7 @@ namespace Igloo
                 while (true)
                 {
                     //If there are no open forms, close the application.
-                    if (Application.OpenForms.Count == 1)
+                    if (Application.OpenForms.Count == 2)
                     {
                         //Shutdown CEF process
                         InvokeOnUI.Invoke(new Action(() =>

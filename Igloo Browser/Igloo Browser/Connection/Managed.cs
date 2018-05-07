@@ -55,8 +55,7 @@ namespace Igloo.Connection
 
             ILogger.AddToLog("SSH", "Trying to connect to SSH server.... Please wait.");
 
-            sshService = new GlobalSSH(); ILogger.AddToLog("SSH", "Created SSH Object");
-            sshService.StartSSHService(sshIP, sshPort.ToString(), "public", "Public36");
+            sshService = new GlobalSSH(sshIP, sshPort, "public", "Public36", true); ILogger.AddToLog("SSH", "Created SSH Object");
             PortSSH();
 
             ILogger.AddToLog("SSH", "SSH service started!");
@@ -64,10 +63,9 @@ namespace Igloo.Connection
 
         private void PortSSH()
         {
-            sshService.ForwardLocalPort("2445", "192.168.0.11"); ILogger.AddToLog("SSH", "Forward Port 2445");
-            sshService.ForwardLocalPort("3389", "192.168.0.11"); ILogger.AddToLog("SSH", "Forward Port 3389");
-            sshService.ForwardLocalPort("5750", "192.168.0.11"); ILogger.AddToLog("SSH", "Forward Port 5750");
-
+            sshService.TunnelLocalPort("192.168.0.11", "2445", true);
+            sshService.TunnelLocalPort("192.168.0.11", "3389", true);
+            sshService.TunnelLocalPort("192.168.0.11", "5750", true);
         }
 
         #endregion
