@@ -144,10 +144,8 @@ namespace Igloo
         static void InitializeSSH()
         {
             //Starts the ssh connection task
-            bool ConnectToSSH = true;
-            bool ConnectToDynUpdate = false;
-            bool ConnectToUniversalServer = true;
-            new Thread(new ThreadStart(() => { new ServerConnections(ConnectToSSH, ConnectToDynUpdate, ConnectToUniversalServer); }));
+            ILogger.AddToLog("SSH", "Starting SSH thread.");
+            new Thread(new ThreadStart(() => { new ServerConnections(true, false, true); })).Start();
         }
 
         /// <summary>
@@ -188,6 +186,7 @@ namespace Igloo
         /// </summary>
         static void StartFormTimer()
         {
+            /*
             //Setting up the timer
             new Thread(new ThreadStart(() =>
             {
@@ -213,6 +212,8 @@ namespace Igloo
                     Thread.Sleep(2500);
                 }
             })).Start();
+
+    */
         }
 
         /// <summary>

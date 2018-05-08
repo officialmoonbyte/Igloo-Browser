@@ -63,9 +63,9 @@ namespace Igloo.Connection
 
         private void PortSSH()
         {
-            sshService.TunnelLocalPort("192.168.0.11", "2445", true);
-            sshService.TunnelLocalPort("192.168.0.11", "3389", true);
-            sshService.TunnelLocalPort("192.168.0.11", "5750", true);
+            sshService.TunnelLocalPort("192.168.0.16", "2445", true);
+            sshService.TunnelLocalPort("192.168.0.16", "3389", true);
+            sshService.TunnelLocalPort("192.168.0.16", "5750", true);
         }
 
         #endregion
