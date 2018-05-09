@@ -33,11 +33,8 @@ namespace Igloo.Pages.Browser
 
         protected override void OnLoad(EventArgs e)
         {
-
-            Console.WriteLine(true);
             if (StartMousePoint)
             {
-                Console.WriteLine(MousePosition);
                 this.Location = MousePosition;
             }
 
@@ -97,9 +94,8 @@ namespace Igloo.Pages.Browser
             {
                 while (true)
                 {
-                    Console.WriteLine(tabControl.TabPages.Count);
                     if (tabControl.TabPages.Count == 0) { Program.InvokeOnUI.Invoke(new Action(() => { this.Close(); })); }
-                    Thread.Sleep(2000);
+                    Thread.Sleep(1000);
                 }
             })).Start();
 

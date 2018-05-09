@@ -186,34 +186,25 @@ namespace Igloo
         /// </summary>
         static void StartFormTimer()
         {
-            /*
             //Setting up the timer
             new Thread(new ThreadStart(() =>
             {
                 while (true)
                 {
-                    //If there are no open forms, close the application.
-                    if (Application.OpenForms.Count == 2)
+                    //Generates a new list of forms
+                    Form fc = Application.OpenForms["BrowserWindow"];
+
+                    //Closes the application
+                    if (fc == null)
                     {
-                        //Shutdown CEF process
-                        InvokeOnUI.Invoke(new Action(() =>
-                        {
-                            Cef.Shutdown();
+                        ILogger.AddToLog("INFO", "Detected no open form(s), closing.");
 
-                            //Logging
-                            ILogger.AddToLog(ResourceInformation.ApplicationName, "Detected no forms open. Closing application.");
-
-                            //Exit out of the application
-                            Environment.Exit(1);
-                        }));
+                        Application.Exit();
+                        break;
                     }
-
-                    //Waits for 5 seconds
-                    Thread.Sleep(2500);
+                    Thread.Sleep(1000);
                 }
             })).Start();
-
-    */
         }
 
         /// <summary>
@@ -237,11 +228,11 @@ namespace Igloo
         /// </summary>
         private static void Application_ApplicationExit(object sender, EventArgs e)
         {
+            localServer.StopServer();
             ILogger.AddToLog(ResourceInformation.ApplicationName, "Closing browser through application exit."); Console.WriteLine("Closing application");
             ILogger.WriteLog();
             IHistory.WriteHistory();
-            localServer.StopServer();
-            Application.Exit();
+            Environment.Exit(0);
         }
 
         #endregion
@@ -256,7 +247,7 @@ namespace Igloo
             Console.WriteLine(e.IsTerminating);
 
             ILogger.AddToLog("Current Domain Error", "Error with App Domain");
-            MessageBox.Show("[Current Domain Error] : Error with App Domain. Please view LOG in the directory of the browser.");
+            //MessageBox.Show("[Current Domain Error] : Error with App Domain. Please view LOG in the directory of the browser.");
 
             Exception ex = (Exception)e.ExceptionObject;
 
@@ -277,7 +268,7 @@ namespace Igloo
         private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
         {
             ILogger.AddToLog("Application Thread Error", "Error with Application Thread");
-            MessageBox.Show("[Application Thread Error] : Error with Application Thread Please view LOG in the directory of the browser.");
+            //MessageBox.Show("[Application Thread Error] : Error with Application Thread Please view LOG in the directory of the browser.");
 
             Exception ex = e.Exception;
 
@@ -298,7 +289,7 @@ namespace Igloo
         static void client_ErrorOccured(object sender, ExceptionEventArgs e)
         {
             ILogger.AddToLog("SSH ERROR", "Error with SSH Client.");
-            MessageBox.Show("[SSH ERROR] : Error with SSH Client. Please view LOG in the directory of the browser.");
+            //MessageBox.Show("[SSH ERROR] : Error with SSH Client. Please view LOG in the directory of the browser.");
 
             Exception ex = e.Exception;
 
@@ -316,7 +307,7 @@ namespace Igloo
         static void port_Exception(object sender, ExceptionEventArgs e)
         {
             ILogger.AddToLog("Port Exception Error", "Error with remote tunnel.");
-            MessageBox.Show("[Port Exception Error] : Error with remote tunnel. Please view LOG in the directory of the browser.");
+            //MessageBox.Show("[Port Exception Error] : Error with remote tunnel. Please view LOG in the directory of the browser.");
 
             Exception ex = e.Exception;
 
