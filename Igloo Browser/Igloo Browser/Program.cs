@@ -145,7 +145,7 @@ namespace Igloo
         {
             //Starts the ssh connection task
             ILogger.AddToLog("SSH", "Starting SSH thread.");
-            new Thread(new ThreadStart(() => { new ServerConnections(true, false, true); })).Start();
+            new Thread(new ThreadStart(() => { new ServerConnections(true, true, true); })).Start();
         }
 
         /// <summary>
