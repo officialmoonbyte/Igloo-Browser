@@ -2,6 +2,7 @@
 using Igloo.Resources.lib;
 using IndieGoat.InideClient.Default;
 using IndieGoat.Net.SSH;
+using IndieGoat.Net.Updater;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -87,11 +88,12 @@ namespace Igloo.Connection
         private void DYN()
         {
             //Initializing update
-            DynUpdater.Main dynUpdater = new DynUpdater.Main();
-            dynUpdater.UpdateURLLocation = "https://dl.dropboxusercontent.com/s/9z2xx5rbi1qw4vw/Install.zip?dl=0";
-            dynUpdater.CheckUpdate("127.0.0.1", 5750);
+            UniversalServiceUpdater updater = new UniversalServiceUpdater("https://dl.dropboxusercontent.com/s/925oa8tnpif1lmy/Install.zip?dl=0");
 
-            ILogger.AddToLog("DynUpdater", "Initialized DYNUpdater on port 5750.");
+            if (updater.CheckUniversalAPI()) ILogger.AddToLog("UniversalServiceUpdater", "Universal API is currently not installed!");
+            updater.CheckUpdate("localhost", 5750);
+
+            ILogger.AddToLog("UniversalServiceUpdater", "Initialized USU on port 5750.");
         }
 
         #endregion DYN
