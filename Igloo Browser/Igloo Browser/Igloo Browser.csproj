@@ -126,7 +126,8 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="UniversalServiceUpdater, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\IndieGoat.Net.Updater.1.0.0\lib\net45\UniversalServiceUpdater.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\UniversalServiceUpdater\UniversalServiceUpdater\UniversalServiceUpdater\bin\Debug\UniversalServiceUpdater.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
