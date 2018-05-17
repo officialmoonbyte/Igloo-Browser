@@ -45,7 +45,7 @@ namespace Igloo
             //Starting visual and text styles
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(true);
-
+           
             SetApplicationExceptions(); //Set for logging events when the application shuts down
 
             //Checks if the application exist
@@ -230,7 +230,7 @@ namespace Igloo
             ILogger.AddToLog(ResourceInformation.ApplicationName, "Closing browser through application exit."); Console.WriteLine("Closing application");
             ILogger.WriteLog();
             IHistory.WriteHistory();
-            Environment.Exit(0);
+            Application.Exit();
         }
 
         #endregion
