@@ -1,11 +1,10 @@
 ﻿using Igloo.Download;
-using IndieGoat.InideClient.Default;
 
 namespace Igloo.Settings
 {
     public static class Settings
     {
-        public static IndieClient UniversalConnection;
+        public static UniversalClient.UniversalClient UniversalConnection;
 
         public static DownloadRequest downloadItem = new DownloadRequest();
 

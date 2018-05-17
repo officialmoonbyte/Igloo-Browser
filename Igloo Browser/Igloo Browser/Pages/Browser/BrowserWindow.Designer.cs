@@ -34,11 +34,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(121)))), ((int)(((byte)(212)))));
+            this.BorderSize = 2;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Name = "BrowserWindow";
             this.Text = "BrowserWindow";
             this.Load += new System.EventHandler(this.BrowserWindow_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

@@ -2,7 +2,6 @@
 using Igloo.Download;
 using Igloo.Engines;
 using Igloo.Engines.CefSharp.Lib;
-using Igloo.Engines.GeckoFx;
 using Igloo.Events;
 using Igloo.Logger;
 using Igloo.Pages.Settings;
@@ -205,8 +204,6 @@ namespace Igloo.Control.Browser
             SettingsManager.BrowserEngine = SettingsManager.BrowserEngines.CefSharp;
             if (SettingsManager.BrowserEngine == SettingsManager.BrowserEngines.CefSharp)
             { browser = new CefSharpHandle(); ILogger.AddToLog("IBrowser", "Using CEFSHARP as browser engine."); }
-            if (SettingsManager.BrowserEngine == SettingsManager.BrowserEngines.GeckoUI)
-            { browser = new Geckofx(); ILogger.AddToLog("IBrowser", "Using GeckoFX as browser engine."); }
         }
         #endregion
 

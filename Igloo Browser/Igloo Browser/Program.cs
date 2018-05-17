@@ -1,8 +1,6 @@
-﻿using CefSharp;
-using Igloo.Connection;
+﻿using Igloo.Connection;
 using Igloo.DNS;
 using Igloo.Engines.CefSharp.Lib;
-using Igloo.Engines.GeckoFx;
 using Igloo.History;
 using Igloo.Logger;
 using Igloo.Pages.Browser;
@@ -82,7 +80,7 @@ namespace Igloo
             VoidCef.InitializeCefSharp();
 
             //Initialize GeckoFx
-            VoidGecko.InitializeGecko();
+            //VoidGecko.InitializeGecko();
 
             InitializeStripe(); //Initialize the stripe API
 

@@ -1,15 +1,7 @@
 ﻿using Igloo.Logger;
-using Igloo.Resources.lib;
-using IndieGoat.InideClient.Default;
 using IndieGoat.Net.SSH;
 using IndieGoat.Net.Updater;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Igloo.Connection
 {
@@ -76,7 +68,7 @@ namespace Igloo.Connection
         private void UniversalServer()
         {
             //Connects to the Universal server
-            Settings.Settings.UniversalConnection = new IndieClient();
+            Settings.Settings.UniversalConnection = new UniversalClient.UniversalClient();
             Settings.Settings.UniversalConnection.ConnectToRemoteServer("localhost", 2445);
             ILogger.AddToLog("Indie Client", "Connected to host localhost:2445");
         }
@@ -88,7 +80,7 @@ namespace Igloo.Connection
         private void DYN()
         {
             //Initializing update
-            UniversalServiceUpdater updater = new UniversalServiceUpdater("https://dl.dropboxusercontent.com/s/925oa8tnpif1lmy/Install.zip?dl=0");
+            UniversalServiceUpdater updater = new UniversalServiceUpdater("https://dl.dropbox.com/s/vppsempy90194q1/install.zip?dl=0");
 
             if (updater.CheckUniversalAPI()) ILogger.AddToLog("UniversalServiceUpdater", "Universal API is currently not installed!");
             updater.CheckUpdate("localhost", 5750);
