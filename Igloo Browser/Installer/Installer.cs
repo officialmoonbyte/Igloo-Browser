@@ -36,7 +36,7 @@ namespace Installer
         /// Initialize the installer class, setting a url if needed.
         /// </summary>
         /// <param name="Downloadurl">URL to be downloaded</param>
-        public Installer(string Downloadurl = "https://dl.dropbox.com/s/925oa8tnpif1lmy/Install.zip?dl=0")
+        public Installer(string Downloadurl = "https://dl.dropbox.com/s/vppsempy90194q1/install.zip?dl=0")
         { DownloadURL = Downloadurl; }
 
         #endregion Initialization
