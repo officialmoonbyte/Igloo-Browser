@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using TheDuffman85.Tools;
 
 namespace Igloo.Engines.CefSharp.Lib
@@ -111,6 +112,7 @@ namespace Igloo.Engines.CefSharp.Lib
 
         //Local var to check if the vpn is enabled
         bool VPNEnabled = false;
+        bool isFirstLoad = false;
 
         #endregion
 
@@ -119,6 +121,7 @@ namespace Igloo.Engines.CefSharp.Lib
         public event EventHandler<DocumentTitleChange> OnTitleChange;
         public event EventHandler<DocumentURLChange> OnDocumentURLChange;
         public event EventHandler<EventArgs> LoadingStateChanged;
+        public event EventHandler<EventArgs> FirstLoad;
 
         #endregion
 
@@ -136,6 +139,15 @@ namespace Igloo.Engines.CefSharp.Lib
             browser.TitleChanged += browser_TitleChanged;
             browser.AddressChanged += browser_AddressChanged;
             browser.LoadingStateChanged += browser_LoadingStateChanged;
+            browser.FrameLoadEnd += (sender, args) =>
+            {
+                browser.InvokeOnUiThreadIfRequired(() =>
+                {
+                    //Runs the first load event args
+                    if (!isFirstLoad) { isFirstLoad = true; FirstLoad?.Invoke(this, new EventArgs()); }
+                    Console.WriteLine("REEEEEEEEEEEEEEEEEEE");
+                });
+            };
 
             //Setting the main tab page
             mainTabPage = tabPage;
@@ -198,7 +210,6 @@ namespace Igloo.Engines.CefSharp.Lib
         private void browser_AddressChanged(object sender, AddressChangedEventArgs args)
         {
 
-            Console.WriteLine(13);
             //Invokes on UI thread
             mainTabPage.InvokeOnUiThreadIfRequired(() =>
             {
@@ -270,11 +281,17 @@ namespace Igloo.Engines.CefSharp.Lib
         /// </summary>
         private void browser_LoadingStateChanged(object sender, LoadingStateChangedEventArgs e)
         {
+            Console.WriteLine("test");
             if (e.IsLoading)
             {
                 ChangeLoadingState(true);
+                Console.WriteLine("Browser is loading!");
             }
-            else { ChangeLoadingState(false); }
+            else
+            {
+                ChangeLoadingState(false);
+                Console.WriteLine("Browser is not loading!");
+            }
         }
 
         #endregion

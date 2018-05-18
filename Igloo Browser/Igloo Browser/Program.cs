@@ -48,6 +48,11 @@ namespace Igloo
            
             SetApplicationExceptions(); //Set for logging events when the application shuts down
 
+            //Initialize CefSharp
+            VoidCef.InitializeCefSharp();
+
+            OpenForm(); //Opens a new borwser window
+
             //Checks if the application exist
             var exists = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(Assembly.GetEntryAssembly().Location)).Length > 1;
             if (exists)
@@ -76,12 +81,6 @@ namespace Igloo
             InitializeSSH(); //Attemps to connect to the SSH server.
             InitializeLocalServer(); //Loads the local server used to open a new form when a new application is open.
 
-            //Initialize CefSharp
-            VoidCef.InitializeCefSharp();
-
-            //Initialize GeckoFx
-            //VoidGecko.InitializeGecko();
-
             InitializeStripe(); //Initialize the stripe API
 
             ILogger.AddToLog(ResourceInformation.ApplicationName, "Running main form now!");
@@ -89,7 +88,6 @@ namespace Igloo
             //Initializing History
             IHistory.LoadFromFile();
 
-            OpenForm(); //Opens a new borwser window
             StartFormTimer(); //Starts a timer to check when no forms are open
 
             //Running the application loop.
@@ -189,18 +187,14 @@ namespace Igloo
             {
                 while (true)
                 {
-                    //Generates a new list of forms
-                    Form fc = Application.OpenForms["BrowserWindow"];
+                    FormCollection fc = Application.OpenForms;
 
-                    //Closes the application
-                    if (fc == null)
+                    if (fc.Count == 1)
                     {
-                        ILogger.AddToLog("INFO", "Detected no open form(s), closing.");
-
-                        Application.Exit();
-                        break;
+                        ILogger.AddToLog("Info", "Detected no open forms! Closing application.");
+                        ClosingEvents();
                     }
-                    Thread.Sleep(1000);
+                    Thread.Sleep(50);
                 }
             })).Start();
         }
@@ -226,11 +220,23 @@ namespace Igloo
         /// </summary>
         private static void Application_ApplicationExit(object sender, EventArgs e)
         {
-            localServer.StopServer();
             ILogger.AddToLog(ResourceInformation.ApplicationName, "Closing browser through application exit."); Console.WriteLine("Closing application");
+            ClosingEvents();
+        }
+
+        #endregion
+
+        #region ClosingEvents
+
+        /// <summary>
+        /// Runs this thread when the application is going to close.
+        /// </summary>
+        private static void ClosingEvents()
+        {
+            localServer.StopServer();
             ILogger.WriteLog();
             IHistory.WriteHistory();
-            Application.Exit();
+            Environment.Exit(0);
         }
 
         #endregion
@@ -253,11 +259,7 @@ namespace Igloo
             ILogger.AddToLog("Current Domain Error", "StackTrace : " + ex.StackTrace);
             ILogger.AddToLog("Current Domain Error", "Source : " + ex.Source);
 
-            ILogger.WriteLog();
-            IHistory.WriteHistory();
-
-            localServer.StopServer();
-            Application.Exit();
+            ClosingEvents();
         }
 
         /// <summary>
@@ -274,11 +276,7 @@ namespace Igloo
             ILogger.AddToLog("Application Thread Error", "StackTrace : " + ex.StackTrace);
             ILogger.AddToLog("Application Thread Error", "Source : " + ex.Source);
 
-            ILogger.WriteLog();
-            IHistory.WriteHistory();
-
-            localServer.StopServer();
-            Application.Exit();
+            ClosingEvents();
         }
 
         /// <summary>
@@ -295,11 +293,7 @@ namespace Igloo
             ILogger.AddToLog("SSH ERROR", "StackTrace : " + ex.StackTrace);
             ILogger.AddToLog("SSH ERROR", "Source : " + ex.Source);
 
-            ILogger.WriteLog();
-            IHistory.WriteHistory();
-
-            localServer.StopServer();
-            Application.Exit();
+            ClosingEvents();
         }
 
         static void port_Exception(object sender, ExceptionEventArgs e)
@@ -313,11 +307,7 @@ namespace Igloo
             ILogger.AddToLog("Port Exception Error", "StackTrace : " + ex.StackTrace);
             ILogger.AddToLog("Port Exception Error", "Source : " + ex.Source);
 
-            ILogger.WriteLog();
-            IHistory.WriteHistory();
-
-            localServer.StopServer();
-            Application.Exit();
+            ClosingEvents();
         }
 
         #endregion

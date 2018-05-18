@@ -11,6 +11,7 @@ namespace Igloo.Engines
         event EventHandler<DocumentTitleChange> OnTitleChange;
         event EventHandler<DocumentURLChange> OnDocumentURLChange;
         event EventHandler<EventArgs> LoadingStateChanged;
+        event EventHandler<EventArgs> FirstLoad;
 
         void CreateBrowserHandle(string URL, MaterialTabPage tabPage);
         System.Windows.Forms.Control GetBrowser();
