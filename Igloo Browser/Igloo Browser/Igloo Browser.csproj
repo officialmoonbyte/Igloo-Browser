@@ -87,9 +87,8 @@
     <Reference Include="GlobalSSH, Version=2.1.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\GlobalSSH.2.1.3-Beta0\lib\net45\GlobalSSH.dll</HintPath>
     </Reference>
-    <Reference Include="MaterialFramework">
-      <HintPath>..\packages\MaterialFramework.4.0.8-Alpha5\lib\net45\MaterialFramework.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="MaterialFramework, Version=4.1.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialFramework.4.1.8\lib\net45\MaterialFramework.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>

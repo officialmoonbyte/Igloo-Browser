@@ -175,10 +175,6 @@ namespace Igloo.Control.Browser
                     BrowserHeader.CanGoForwardBool(browser.IsForwardAvailable());
                 }); BrowserHeader.Invoke(new MethodInvoker(action));
             });
-            browser.FirstLoad += ((obj, args) =>
-            {
-                pnl.Controls.Add(browser.GetBrowser());
-            });
 
             pnl.Controls.Add(browser.GetBrowser());
 
