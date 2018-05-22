@@ -145,7 +145,6 @@ namespace Igloo.Engines.CefSharp.Lib
                 {
                     //Runs the first load event args
                     if (!isFirstLoad) { isFirstLoad = true; FirstLoad?.Invoke(this, new EventArgs()); }
-                    Console.WriteLine("REEEEEEEEEEEEEEEEEEE");
                 });
             };
 
@@ -281,16 +280,13 @@ namespace Igloo.Engines.CefSharp.Lib
         /// </summary>
         private void browser_LoadingStateChanged(object sender, LoadingStateChangedEventArgs e)
         {
-            Console.WriteLine("test");
             if (e.IsLoading)
             {
                 ChangeLoadingState(true);
-                Console.WriteLine("Browser is loading!");
             }
             else
             {
                 ChangeLoadingState(false);
-                Console.WriteLine("Browser is not loading!");
             }
         }
 
