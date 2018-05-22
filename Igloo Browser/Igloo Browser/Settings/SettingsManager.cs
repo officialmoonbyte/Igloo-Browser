@@ -92,7 +92,7 @@ namespace Igloo.Settings
         {
             ILogger.AddToLog("GFS", "Checking " + SettingName + ", with datavalue " + DefaultValue + " exist.");
             //Check if the setting exist's
-            if (!manager.CheckSetting(SettingName))
+            if (manager.CheckSetting(SettingName))
             {
                 ILogger.AddToLog("GFS", SettingName + " exist! Returning value.");
                 //Return the value of the setting
