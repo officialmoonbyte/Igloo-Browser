@@ -56,7 +56,6 @@ namespace Igloo.Pages.Browser
             tabHeader.Width = this.Width - 178 - 32;
             tabHeader.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
             tabHeader.BackColor = Color.FromArgb(35, 35, 64);
-            this.BorderColor = Color.FromArgb(35, 35, 64);
             tabHeader.CloseButtonHoverColor = Color.FromArgb(255, 90, 90);
             tabHeader.TabDragOut += (obj, args) =>
             {
