@@ -98,7 +98,10 @@ namespace Igloo.Download
             }
 
             //Editing the setting
-            gfs.EditSetting(DownloadSettingHeader, RawDownloadString);
+            try
+            {
+                gfs.EditSetting(DownloadSettingHeader, RawDownloadString);
+            } catch { ILogger.AddToLog("Download", "Failed to write download histroy."); }
         }
     }
 }
