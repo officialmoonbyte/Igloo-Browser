@@ -1,4 +1,8 @@
 ﻿using GlobalSettingsFramework;
+using Igloo.Logger;
+using System;
+using System.IO;
+using System.Windows.Forms;
 
 namespace Igloo.Settings
 {
@@ -18,8 +22,8 @@ namespace Igloo.Settings
 
         #region Setting Values
 
-        public static string VoidUser;
-        public static string VoidPassword;
+        public static string UniversalUsername;
+        public static string UniversalPassword;
 
         public static SearchEngines SearchEngine;
         public static HistoryEngines HistorySettings;
@@ -58,8 +62,16 @@ namespace Igloo.Settings
         /// </summary>
         public static void InitializeValues()
         {
-            VoidUser = InvalidateSetting(_Username, "");
-            VoidPassword = InvalidateSetting(_Password, "");
+            manager = new GFS();
+            string settingsDirectory = Application.StartupPath + @"\Settings\";
+
+            if (!Directory.Exists(settingsDirectory)) Directory.CreateDirectory(settingsDirectory);
+
+            string SettingFile = settingsDirectory + "applicationSettings.set";
+            manager.SettingsDirectory = SettingFile;
+
+            UniversalUsername = InvalidateSetting(_Username, "");
+            UniversalPassword = InvalidateSetting(_Password, "");
             BrowserEngine = BrowserEngineFromString(InvalidateSetting(_BrowserEngine, _cefSharp));
             SearchEngine = SearchEngineFromString(InvalidateSetting(_SearchEngine, _google));
             HistorySettings = HistoryEngineFromString(InvalidateSetting(_HistoryEngine, _SyncAll));
@@ -78,14 +90,17 @@ namespace Igloo.Settings
         /// <returns></returns>
         private static string InvalidateSetting(string SettingName, string DefaultValue)
         {
+            ILogger.AddToLog("GFS", "Checking " + SettingName + ", with datavalue " + DefaultValue + " exist.");
             //Check if the setting exist's
-            if (manager.CheckSetting(SettingName))
+            if (!manager.CheckSetting(SettingName))
             {
+                ILogger.AddToLog("GFS", SettingName + " exist! Returning value.");
                 //Return the value of the setting
                 return manager.ReadSetting(SettingName);
             }
             else
             {
+                ILogger.AddToLog("GFS", SettingName + " does not exist! Creating setting with " + DefaultValue + " as a datavalue");
                 //Edit the setting and then return the default value.
                 manager.EditSetting(SettingName, DefaultValue);
                 return DefaultValue;
@@ -101,8 +116,8 @@ namespace Igloo.Settings
         /// </summary>
         public static void SaveValues()
         {
-            manager.EditSetting(_Username, VoidUser);
-            manager.EditSetting(_Password, VoidPassword);
+            manager.EditSetting(_Username, UniversalUsername);
+            manager.EditSetting(_Password, UniversalPassword);
             manager.EditSetting(_SearchEngine, SearchEngineToString(SearchEngine));
             manager.EditSetting(_HistoryEngine, HistoryEngineToString(HistorySettings));
             manager.EditSetting(_UserAgent, UserAgentToString(UserAgent));
@@ -354,24 +369,6 @@ namespace Igloo.Settings
             //If the values are none, return the default browser
             return _cefSharp;
         }
-
-        #endregion
-
-        #endregion
-
-        #region Update in the near future
-
-        #region Donation
-
-        public static DonatePeriods DonatePeriod;
-
-        #endregion
-
-        #region OpenChat
-
-        public static bool LinkedOpenChat;
-
-        public static string OpenChatUsername;
 
         #endregion
 

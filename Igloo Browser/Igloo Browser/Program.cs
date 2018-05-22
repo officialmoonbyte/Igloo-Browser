@@ -51,6 +51,9 @@ namespace Igloo
             //Initialize CefSharp
             VoidCef.InitializeCefSharp();
 
+            //Initialize settings manager
+            Settings.SettingsManager.InitializeValues();
+
             OpenForm(); //Opens a new borwser window
 
             //Checks if the application exist
@@ -236,6 +239,7 @@ namespace Igloo
         private static void ClosingEvents()
         {
             Settings.Settings.downloadItem.SaveDownloadItems();
+            Settings.SettingsManager.SaveValues();
             localServer.StopServer();
             ILogger.WriteLog();
             IHistory.WriteHistory();

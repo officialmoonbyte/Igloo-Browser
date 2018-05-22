@@ -39,7 +39,7 @@ namespace Igloo.Pages.Browser
             }
 
             // MaterialForm //
-            this.HeaderHeight = 33;
+            this.HeaderHeight = 35;
             this.HeaderColor = Color.FromArgb(35, 35, 64);
             this.Showicon = false;
             this.ShowTitleLabel = false;
@@ -49,7 +49,7 @@ namespace Igloo.Pages.Browser
             base.OnLoad(e);
 
             // TabHeader //
-            tabHeader.Location = new Point(32, 0);
+            tabHeader.Location = new Point(32, 1);
             tabHeader.BasedTabControl = tabControl;
             tabHeader.EnableAddButton = true;
             tabHeader.ShowCloseButton = true;
@@ -73,7 +73,7 @@ namespace Igloo.Pages.Browser
             this.Controls.Add(tabHeader);
 
             // TabControl
-            tabControl.Location = new Point(1, tabHeader.Height);
+            tabControl.Location = new Point(1, tabHeader.Height +1);
             tabControl.Size = new Size(this.Width - 2, this.Height - tabHeader.Height - 2);
             tabControl.Anchor = (AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Bottom);
 
