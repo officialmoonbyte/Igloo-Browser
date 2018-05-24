@@ -71,6 +71,9 @@ namespace Igloo.Control.BrowserButtons
             //Draw the left side of the arrow
             g.DrawLine(p, new Point((this.Width / 2) + 9, (this.Height / 2)), new Point((this.Width / 2),
                 (this.Height / 2) + 8));
+
+            g.SmoothingMode = SmoothingMode.Default;
+            g.InterpolationMode = InterpolationMode.Default;
         }
 
         protected GraphicsPath GetRoundedLine(PointF[] points, float cornerRadius)

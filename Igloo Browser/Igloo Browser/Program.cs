@@ -48,6 +48,8 @@ namespace Igloo
            
             SetApplicationExceptions(); //Set for logging events when the application shuts down
 
+            ILogger.AddToLog(ResourceInformation.ApplicationName, "Running main form now!");
+
             //Initialize CefSharp
             VoidCef.InitializeCefSharp();
 
@@ -85,8 +87,6 @@ namespace Igloo
             InitializeLocalServer(); //Loads the local server used to open a new form when a new application is open.
 
             InitializeStripe(); //Initialize the stripe API
-
-            ILogger.AddToLog(ResourceInformation.ApplicationName, "Running main form now!");
 
             //Initializing History
             IHistory.LoadFromFile();

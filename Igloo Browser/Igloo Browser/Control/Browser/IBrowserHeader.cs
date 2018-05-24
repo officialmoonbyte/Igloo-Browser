@@ -20,6 +20,7 @@ namespace Igloo.Control.Browser
         ReloadButton reloadButton = new ReloadButton();
         SettingsButton settingsButton = new SettingsButton();
         FlatButton VPNButton = new FlatButton();
+        DownloadButton downloadButton = new DownloadButton();
 
         //Text for Online Searching
         MaterialTextBox text_Search = new MaterialTextBox();
@@ -91,6 +92,15 @@ namespace Igloo.Control.Browser
 
             this.Controls.Add(settingsButton);
 
+            downloadButton.Location = new Point(this.Width - 64, 0);
+            downloadButton.Anchor = (AnchorStyles.Right | AnchorStyles.Top);
+
+            downloadButton.Click += (obj, args) =>
+            {
+
+            };
+            this.Controls.Add(downloadButton);
+
             // Home Button //
             homeButton.Location = new Point(32 * 3, 0);
 
@@ -106,7 +116,7 @@ namespace Igloo.Control.Browser
             text_Search.Anchor = (AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Left);
             text_Search.Font = new Font("Segoe UI", 12f);
             text_Search.Text = "";
-            text_Search.Width = this.Width - (32 * 4) - 32;
+            text_Search.Width = this.Width - (32 * 4) - 64;
 
             text_Search.BackColor = Color.White;
             text_Search.BorderColor = Color.White;
