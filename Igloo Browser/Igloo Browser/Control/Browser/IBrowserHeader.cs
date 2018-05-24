@@ -37,6 +37,7 @@ namespace Igloo.Control.Browser
         public event EventHandler SettingsClicked;
         public event EventHandler VPNButtonClicked;
         public event EventHandler TextSearch_EnterPressed;
+        public event EventHandler DownloadButtonClicked;
 
         #endregion 
 
@@ -97,7 +98,7 @@ namespace Igloo.Control.Browser
 
             downloadButton.Click += (obj, args) =>
             {
-
+                DownloadButtonClicked?.Invoke(this, new EventArgs());
             };
             this.Controls.Add(downloadButton);
 

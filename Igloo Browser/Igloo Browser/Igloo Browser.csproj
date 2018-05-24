@@ -140,6 +140,9 @@
     <Compile Include="Control\Browser\IBrowserHeader.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Control\Browser\VPNToggleButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="DNS\CheckInternet.cs" />
     <Compile Include="Download\DownloadObject.cs" />
     <Compile Include="Download\DownloadRequest.cs" />
