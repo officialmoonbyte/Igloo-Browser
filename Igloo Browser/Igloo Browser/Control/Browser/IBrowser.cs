@@ -90,11 +90,11 @@ namespace Igloo.Control.Browser
                 {
                     if (browser.GetVPNStatus())
                     {
-                        BrowserHeader.ChangeVPNText("Disable VPN");
+                        BrowserHeader.ChangeVPNStatus(true);
                     }
                     else
                     {
-                        BrowserHeader.ChangeVPNText("Enable VPN");
+                        BrowserHeader.ChangeVPNStatus(false);
                     }
                 }
             });

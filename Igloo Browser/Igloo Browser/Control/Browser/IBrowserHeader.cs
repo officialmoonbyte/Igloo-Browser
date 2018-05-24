@@ -19,7 +19,7 @@ namespace Igloo.Control.Browser
         HomeButton homeButton = new HomeButton();
         ReloadButton reloadButton = new ReloadButton();
         SettingsButton settingsButton = new SettingsButton();
-        FlatButton VPNButton = new FlatButton();
+        VPNToggleButton VPNButton = new VPNToggleButton();
         DownloadButton downloadButton = new DownloadButton();
 
         //Text for Online Searching
@@ -102,6 +102,16 @@ namespace Igloo.Control.Browser
             };
             this.Controls.Add(downloadButton);
 
+            VPNButton.Location = new Point(this.Width - 96, 0);
+            VPNButton.Anchor = (AnchorStyles.Right | AnchorStyles.Top);
+
+            VPNButton.Click += (obj, args) =>
+            {
+                VPNButtonClicked?.Invoke(this, new EventArgs());
+            };
+
+            this.Controls.Add(VPNButton);
+
             // Home Button //
             homeButton.Location = new Point(32 * 3, 0);
 
@@ -150,23 +160,8 @@ namespace Igloo.Control.Browser
             // Settings Button //
             settingsButton.Location = new Point(this.Width - 32, 0);
 
-            // VPN Button //
-            VPNButton.Location = new Point(this.Width - 156, 0);
-            VPNButton.Size = new Size(128, 28);
-            VPNButton.Name = "vpn";
-
             // Text Search //
             text_Search.Size = new Size(this.Width - 32, 24);
-        }
-
-        /// <summary>
-        /// Used to change the VPN text
-        /// </summary>
-        /// <param name="Text">Value to set the text of the VPN</param>
-        public void ChangeVPNText(string Text)
-        {
-            //Changes the text of the VPN button
-            VPNButton.Text = Text;
         }
 
         /// <summary>
@@ -218,6 +213,11 @@ namespace Igloo.Control.Browser
         public void CanGoBackBool(bool CanGoBack)
         {
             sendBack.Enabled = CanGoBack;
+        }
+
+        public void ChangeVPNStatus(bool status)
+        {
+            VPNButton.IsVPNEnabled = status;
         }
 
         public void CanGoForwardBool(bool CanGoForward)
