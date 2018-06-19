@@ -20,6 +20,7 @@ namespace Igloo
 {
     static class Program
     {
+
         #region Vars
 
         //Used to invoke on UI thread
