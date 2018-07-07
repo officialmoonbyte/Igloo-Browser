@@ -6,6 +6,7 @@ using Igloo.History;
 using Igloo.Logger;
 using Igloo.Resources.lib;
 using Igloo.Settings;
+using IglooBrowser.Browser.Engines;
 using IndieGoat.MaterialFramework.Controls;
 using System;
 using System.Collections.Generic;

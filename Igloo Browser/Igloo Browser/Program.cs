@@ -40,8 +40,8 @@ namespace Igloo
         static void Main()
         {
             //Static vars
-            string sshIP = "indiegoat.us";
-            int sshPort = 80;
+           // string sshIP = "indiegoat.us";
+          //  int sshPort = 80;
 
             //Starting visual and text styles
             Application.EnableVisualStyles();

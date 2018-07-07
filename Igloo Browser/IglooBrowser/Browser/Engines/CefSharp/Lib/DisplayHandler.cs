@@ -2,6 +2,7 @@
 using CefSharp.WinForms;
 using CefSharp.WinForms.Internals;
 using Igloo.Resources.lib;
+using IglooBrowser.Browser.Engines;
 using System;
 using System.Collections.Generic;
 using System.Drawing;

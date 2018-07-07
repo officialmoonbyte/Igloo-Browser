@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IndieGoat.Net.Tcp;
+using System;
 
 namespace Igloo.Resources.lib
 {
@@ -14,7 +15,7 @@ namespace Igloo.Resources.lib
 
         public static bool VPNEnabled = false;
 
-        public static UniversalClient.UniversalClient serverConnection = new UniversalClient.UniversalClient();
+        public static UniversalClient serverConnection = new UniversalClient();
 
         public static int GTTS = 2000; //GLOBAL THREAD TICK SPEED
     }
