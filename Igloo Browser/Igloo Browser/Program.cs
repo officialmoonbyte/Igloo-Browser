@@ -6,7 +6,6 @@ using Igloo.Logger;
 using Igloo.Pages.Browser;
 using Igloo.Resources.lib;
 using Igloo.Server;
-using Renci.SshNet.Common;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -38,10 +37,6 @@ namespace Igloo
         [STAThread]
         static void Main()
         {
-            //Static vars
-            string sshIP = "indiegoat.us";
-            int sshPort = 80;
-
             //Starting visual and text styles
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(true);
@@ -83,7 +78,6 @@ namespace Igloo
                 Application.Exit();
             }
 
-            InitializeSSH(); //Attemps to connect to the SSH server.
             InitializeLocalServer(); //Loads the local server used to open a new form when a new application is open.
 
             InitializeStripe(); //Initialize the stripe API
@@ -138,16 +132,6 @@ namespace Igloo
         #endregion
 
         #region Networking startup task
-
-        /// <summary>
-        /// Initialize a new SSH connection
-        /// </summary>
-        static void InitializeSSH()
-        {
-            //Starts the ssh connection task
-            ILogger.AddToLog("SSH", "Starting SSH thread.");
-            new Thread(new ThreadStart(() => { new ServerConnections(true, true, true); })).Start();
-        }
 
         /// <summary>
         /// Starts listening on a local port to detect when the application is open -- Saves memory.
@@ -282,37 +266,6 @@ namespace Igloo
             ILogger.AddToLog("Application Thread Error", "Message : " + ex.Message);
             ILogger.AddToLog("Application Thread Error", "StackTrace : " + ex.StackTrace);
             ILogger.AddToLog("Application Thread Error", "Source : " + ex.Source);
-
-            ClosingEvents();
-        }
-
-        /// <summary>
-        /// For logging when there is a Exception in SSHClient
-        /// </summary>
-        static void client_ErrorOccured(object sender, ExceptionEventArgs e)
-        {
-            ILogger.AddToLog("SSH ERROR", "Error with SSH Client.");
-            //MessageBox.Show("[SSH ERROR] : Error with SSH Client. Please view LOG in the directory of the browser.");
-
-            Exception ex = e.Exception;
-
-            ILogger.AddToLog("SSH ERROR", "Message : " + ex.Message);
-            ILogger.AddToLog("SSH ERROR", "StackTrace : " + ex.StackTrace);
-            ILogger.AddToLog("SSH ERROR", "Source : " + ex.Source);
-
-            ClosingEvents();
-        }
-
-        static void port_Exception(object sender, ExceptionEventArgs e)
-        {
-            ILogger.AddToLog("Port Exception Error", "Error with remote tunnel.");
-            //MessageBox.Show("[Port Exception Error] : Error with remote tunnel. Please view LOG in the directory of the browser.");
-
-            Exception ex = e.Exception;
-
-            ILogger.AddToLog("Port Exception Error", "Message : " + ex.Message);
-            ILogger.AddToLog("Port Exception Error", "StackTrace : " + ex.StackTrace);
-            ILogger.AddToLog("Port Exception Error", "Source : " + ex.Source);
 
             ClosingEvents();
         }
