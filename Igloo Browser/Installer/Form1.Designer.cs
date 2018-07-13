@@ -33,17 +33,17 @@
             this.layer1 = new System.Windows.Forms.Panel();
             this.lbl_Layer1_InstallDist = new IndieGoat.MaterialFramework.Controls.MaterialLabel();
             this.btn_Layer1_FindDirectory = new IndieGoat.MaterialFramework.Controls.FlatButton();
+            this.txt_Layer1_Directory = new IndieGoat.MaterialFramework.Controls.MaterialTextBox();
+            this.lbl_Layer1_Args = new IndieGoat.MaterialFramework.Controls.MaterialLabel();
+            this.btn_Layer1_Canc = new IndieGoat.MaterialFramework.Controls.FlatButton();
+            this.btn_Layer1_Next = new IndieGoat.MaterialFramework.Controls.FlatButton();
+            this.lbl_Layer1_Title = new IndieGoat.MaterialFramework.Controls.MaterialLabel();
             this.layer2 = new System.Windows.Forms.Panel();
             this.pgb_Install = new IndieGoat.MaterialFramework.Controls.MaterialProgressBar();
             this.pgb_Download = new IndieGoat.MaterialFramework.Controls.MaterialProgressBar();
             this.lbl_Layer2_Installing = new IndieGoat.MaterialFramework.Controls.MaterialLabel();
             this.lbl_Layer2_Downloading = new IndieGoat.MaterialFramework.Controls.MaterialLabel();
             this.lbl_Layer2_Title = new IndieGoat.MaterialFramework.Controls.MaterialLabel();
-            this.txt_Layer1_Directory = new IndieGoat.MaterialFramework.Controls.MaterialTextBox();
-            this.lbl_Layer1_Args = new IndieGoat.MaterialFramework.Controls.MaterialLabel();
-            this.btn_Layer1_Canc = new IndieGoat.MaterialFramework.Controls.FlatButton();
-            this.btn_Layer1_Next = new IndieGoat.MaterialFramework.Controls.FlatButton();
-            this.lbl_Layer1_Title = new IndieGoat.MaterialFramework.Controls.MaterialLabel();
             this.Layer3 = new System.Windows.Forms.Panel();
             this.lbl_Layer3_Title = new IndieGoat.MaterialFramework.Controls.MaterialLabel();
             this.lbl_Layer3_StartMenu = new IndieGoat.MaterialFramework.Controls.MaterialLabel();
@@ -110,76 +110,6 @@
             this.btn_Layer1_FindDirectory.TextColor = System.Drawing.Color.Black;
             this.btn_Layer1_FindDirectory.WaveColor = System.Drawing.Color.Black;
             this.btn_Layer1_FindDirectory.Click += new System.EventHandler(this.btn_Layer1_FindDirectory_Click);
-            // 
-            // layer2
-            // 
-            this.layer2.Controls.Add(this.pgb_Install);
-            this.layer2.Controls.Add(this.pgb_Download);
-            this.layer2.Controls.Add(this.lbl_Layer2_Installing);
-            this.layer2.Controls.Add(this.lbl_Layer2_Downloading);
-            this.layer2.Controls.Add(this.lbl_Layer2_Title);
-            this.layer2.Location = new System.Drawing.Point(721, 29);
-            this.layer2.Name = "layer2";
-            this.layer2.Size = new System.Drawing.Size(320, 250);
-            this.layer2.TabIndex = 7;
-            // 
-            // pgb_Install
-            // 
-            this.pgb_Install.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.pgb_Install.Location = new System.Drawing.Point(11, 144);
-            this.pgb_Install.Maximum = 100;
-            this.pgb_Install.Minimum = 0;
-            this.pgb_Install.Name = "pgb_Install";
-            this.pgb_Install.ProgressBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(176)))), ((int)(((byte)(37)))));
-            this.pgb_Install.Size = new System.Drawing.Size(301, 10);
-            this.pgb_Install.TabIndex = 4;
-            this.pgb_Install.Value = 0;
-            // 
-            // pgb_Download
-            // 
-            this.pgb_Download.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.pgb_Download.Location = new System.Drawing.Point(11, 98);
-            this.pgb_Download.Maximum = 100;
-            this.pgb_Download.Minimum = 0;
-            this.pgb_Download.Name = "pgb_Download";
-            this.pgb_Download.ProgressBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(176)))), ((int)(((byte)(37)))));
-            this.pgb_Download.Size = new System.Drawing.Size(301, 10);
-            this.pgb_Download.TabIndex = 3;
-            this.pgb_Download.Value = 0;
-            // 
-            // lbl_Layer2_Installing
-            // 
-            this.lbl_Layer2_Installing.AutoSize = true;
-            this.lbl_Layer2_Installing.BackColor = System.Drawing.Color.Transparent;
-            this.lbl_Layer2_Installing.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lbl_Layer2_Installing.Location = new System.Drawing.Point(129, 121);
-            this.lbl_Layer2_Installing.Name = "lbl_Layer2_Installing";
-            this.lbl_Layer2_Installing.Size = new System.Drawing.Size(64, 19);
-            this.lbl_Layer2_Installing.TabIndex = 2;
-            this.lbl_Layer2_Installing.Text = "Installing";
-            // 
-            // lbl_Layer2_Downloading
-            // 
-            this.lbl_Layer2_Downloading.AutoSize = true;
-            this.lbl_Layer2_Downloading.BackColor = System.Drawing.Color.Transparent;
-            this.lbl_Layer2_Downloading.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lbl_Layer2_Downloading.Location = new System.Drawing.Point(116, 74);
-            this.lbl_Layer2_Downloading.Name = "lbl_Layer2_Downloading";
-            this.lbl_Layer2_Downloading.Size = new System.Drawing.Size(90, 19);
-            this.lbl_Layer2_Downloading.TabIndex = 1;
-            this.lbl_Layer2_Downloading.Text = "Downloading";
-            // 
-            // lbl_Layer2_Title
-            // 
-            this.lbl_Layer2_Title.AutoSize = true;
-            this.lbl_Layer2_Title.BackColor = System.Drawing.Color.Transparent;
-            this.lbl_Layer2_Title.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.lbl_Layer2_Title.Location = new System.Drawing.Point(73, 18);
-            this.lbl_Layer2_Title.Name = "lbl_Layer2_Title";
-            this.lbl_Layer2_Title.Size = new System.Drawing.Size(176, 42);
-            this.lbl_Layer2_Title.TabIndex = 0;
-            this.lbl_Layer2_Title.Text = "Please wait while Crash \r\ndownload and install";
-            this.lbl_Layer2_Title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txt_Layer1_Directory
             // 
@@ -251,6 +181,76 @@
             this.lbl_Layer1_Title.Size = new System.Drawing.Size(246, 25);
             this.lbl_Layer1_Title.TabIndex = 0;
             this.lbl_Layer1_Title.Text = "Crash - Application Installer";
+            // 
+            // layer2
+            // 
+            this.layer2.Controls.Add(this.pgb_Install);
+            this.layer2.Controls.Add(this.pgb_Download);
+            this.layer2.Controls.Add(this.lbl_Layer2_Installing);
+            this.layer2.Controls.Add(this.lbl_Layer2_Downloading);
+            this.layer2.Controls.Add(this.lbl_Layer2_Title);
+            this.layer2.Location = new System.Drawing.Point(721, 29);
+            this.layer2.Name = "layer2";
+            this.layer2.Size = new System.Drawing.Size(320, 250);
+            this.layer2.TabIndex = 7;
+            // 
+            // pgb_Install
+            // 
+            this.pgb_Install.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.pgb_Install.Location = new System.Drawing.Point(11, 144);
+            this.pgb_Install.Maximum = 100;
+            this.pgb_Install.Minimum = 0;
+            this.pgb_Install.Name = "pgb_Install";
+            this.pgb_Install.ProgressBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(176)))), ((int)(((byte)(37)))));
+            this.pgb_Install.Size = new System.Drawing.Size(301, 10);
+            this.pgb_Install.TabIndex = 4;
+            this.pgb_Install.Value = 0;
+            // 
+            // pgb_Download
+            // 
+            this.pgb_Download.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.pgb_Download.Location = new System.Drawing.Point(11, 98);
+            this.pgb_Download.Maximum = 100;
+            this.pgb_Download.Minimum = 0;
+            this.pgb_Download.Name = "pgb_Download";
+            this.pgb_Download.ProgressBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(176)))), ((int)(((byte)(37)))));
+            this.pgb_Download.Size = new System.Drawing.Size(301, 10);
+            this.pgb_Download.TabIndex = 3;
+            this.pgb_Download.Value = 0;
+            // 
+            // lbl_Layer2_Installing
+            // 
+            this.lbl_Layer2_Installing.AutoSize = true;
+            this.lbl_Layer2_Installing.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_Layer2_Installing.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.lbl_Layer2_Installing.Location = new System.Drawing.Point(129, 121);
+            this.lbl_Layer2_Installing.Name = "lbl_Layer2_Installing";
+            this.lbl_Layer2_Installing.Size = new System.Drawing.Size(64, 19);
+            this.lbl_Layer2_Installing.TabIndex = 2;
+            this.lbl_Layer2_Installing.Text = "Installing";
+            // 
+            // lbl_Layer2_Downloading
+            // 
+            this.lbl_Layer2_Downloading.AutoSize = true;
+            this.lbl_Layer2_Downloading.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_Layer2_Downloading.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.lbl_Layer2_Downloading.Location = new System.Drawing.Point(116, 74);
+            this.lbl_Layer2_Downloading.Name = "lbl_Layer2_Downloading";
+            this.lbl_Layer2_Downloading.Size = new System.Drawing.Size(90, 19);
+            this.lbl_Layer2_Downloading.TabIndex = 1;
+            this.lbl_Layer2_Downloading.Text = "Downloading";
+            // 
+            // lbl_Layer2_Title
+            // 
+            this.lbl_Layer2_Title.AutoSize = true;
+            this.lbl_Layer2_Title.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_Layer2_Title.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.lbl_Layer2_Title.Location = new System.Drawing.Point(73, 18);
+            this.lbl_Layer2_Title.Name = "lbl_Layer2_Title";
+            this.lbl_Layer2_Title.Size = new System.Drawing.Size(176, 42);
+            this.lbl_Layer2_Title.TabIndex = 0;
+            this.lbl_Layer2_Title.Text = "Please wait while Crash \r\ndownload and install";
+            this.lbl_Layer2_Title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Layer3
             // 
