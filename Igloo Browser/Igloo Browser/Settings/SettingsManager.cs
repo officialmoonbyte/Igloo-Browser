@@ -70,8 +70,8 @@ namespace Igloo.Settings
             string SettingFile = settingsDirectory + "applicationSettings.set";
             manager.SettingsDirectory = SettingFile;
 
-            UniversalUsername = InvalidateSetting(_Username, "");
-            UniversalPassword = InvalidateSetting(_Password, "");
+            UniversalUsername = InvalidateSetting(_Username, null);
+            UniversalPassword = InvalidateSetting(_Password, null);
             BrowserEngine = BrowserEngineFromString(InvalidateSetting(_BrowserEngine, _cefSharp));
             SearchEngine = SearchEngineFromString(InvalidateSetting(_SearchEngine, _google));
             HistorySettings = HistoryEngineFromString(InvalidateSetting(_HistoryEngine, _SyncAll));

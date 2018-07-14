@@ -1,5 +1,6 @@
 ﻿using Igloo.Logger;
 using Igloo.Resources.lib;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -51,6 +52,11 @@ namespace Igloo.History
             ILogger.AddToLog("IHistory", "Wrote all history values to History.hit");
         }
 
+        public static string WriteToString()
+        {
+            return string.Join(Environment.NewLine, History);
+        }
+
         /// <summary>
         /// Used to Initialize and Load the history
         /// </summary>
@@ -64,6 +70,11 @@ namespace Igloo.History
             //Read all of the lines of the History.hit file
             History = File.ReadAllLines(CacheDirectory).ToList();
             ILogger.AddToLog("IHistory", "Finished initializing history!");
+        }
+
+        public static void LoadFromString(string history)
+        {
+            History = history.Split('\r').ToList();
         }
     }
 }

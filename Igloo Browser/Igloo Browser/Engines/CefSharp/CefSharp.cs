@@ -328,11 +328,11 @@ namespace Igloo.Engines.CefSharp.Lib
             string port = "5567";
 
             //Setting resource information to subscribed
-            ResourceInformation.IsSubscribed = true;
+            //ResourceInformation.IsSubscribed = true;
 
             //Check if the user is subscribed
-            if (!ResourceInformation.IsSubscribed)
-            {
+            //if (!ResourceInformation.IsSubscribed)
+            //{
                 Cef.UIThreadTaskFactory.StartNew(delegate
                 {
                     //Changing the Proxy Setting
@@ -361,7 +361,7 @@ namespace Igloo.Engines.CefSharp.Lib
                         return false;
                     }
                 });
-            }
+            //}
 
             //Return false
             return false;
