@@ -57,7 +57,10 @@ namespace Igloo.Connection
         {
             ILogger.AddToLog("INFO", "Authorized request to validate and initialize server connections.");
             string ServerIp = "indiegoat.us";
-            if (ManagedResources.GetExternalIP() == ManagedResources.GetIndiegoatIP()) { ServerIp = "192.168.0.16"; ILogger.AddToLog("WARN", "Changed to a IndieGoat localized IP! This may accure if you are connected locally to the IndieGoat Universal Server. Network issues may be apparent."); }
+            string ExternalIP = ManagedResources.GetExternalIP();
+            string IndieGoatIP = ManagedResources.GetIndiegoatIP();
+            ILogger.AddToLog("INFO", "Found both External and Indie Goat IP. External : " + ExternalIP + ", IndieGoat : " + IndieGoatIP + ".");
+            if (ExternalIP == IndieGoatIP) { ServerIp = "192.168.0.16"; ILogger.AddToLog("WARN", "Changed to a IndieGoat localized IP! This may accure if you are connected locally to the IndieGoat Universal Server. Network issues may be apparent."); }
             int UniversalServerPort = 0;
             if (SettingsManager.UniversalUsername != null) { UniversalServerPort = ManagedResources.GetServerPort(ManagedResources.PortServers.VSLoginServer); }
             else { UniversalServerPort = ManagedResources.GetServerPort(ManagedResources.PortServers.IglooBrowser); }

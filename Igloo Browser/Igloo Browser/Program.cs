@@ -37,6 +37,7 @@ namespace Igloo
         [STAThread]
         static void Main()
         {
+
             //Starting visual and text styles
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(true);
@@ -88,6 +89,13 @@ namespace Igloo
             StartFormTimer(); //Starts a timer to check when no forms are open
 
             Settings.Settings.downloadItem.InitializeDownloadItems(); //Initialize download items from local storage.
+
+            Thread thread = new Thread(new ThreadStart(() =>
+            {
+                //Initializes server connections
+                ServerConnections.InitializeServerConnections();
+            }));
+            thread.Start();
 
             //Running the application loop.
             Application.Run();
