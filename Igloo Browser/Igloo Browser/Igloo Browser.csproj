@@ -93,8 +93,8 @@
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Stripe.net, Version=17.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Stripe.net.17.3.0\lib\net45\Stripe.net.dll</HintPath>
+    <Reference Include="Stripe.net, Version=17.3.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stripe.net.17.3.1\lib\net45\Stripe.net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -129,7 +129,9 @@
     <Compile Include="Control\BrowserButtons\ReloadButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Control\Browser\DownloadButton.cs" />
+    <Compile Include="Control\Browser\DownloadButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Control\Browser\HomeButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
