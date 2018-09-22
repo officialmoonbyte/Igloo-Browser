@@ -184,14 +184,23 @@ namespace Igloo
             {
                 while (true)
                 {
-                    FormCollection fc = Application.OpenForms;
-
-                    if (fc.Count == 1)
+                    try
                     {
-                        ILogger.AddToLog("Info", "Detected no open forms! Closing application.");
-                        ClosingEvents();
+                        FormCollection fc = Application.OpenForms;
+                        Console.WriteLine("Form Count : " + fc.Count);
+                        if (fc.Count == 1)
+                        {
+                            ILogger.AddToLog("Info", "Detected no open forms! Closing application.");
+                            ClosingEvents();
+                            break;
+                        }
+                        Thread.Sleep(50);
                     }
-                    Thread.Sleep(50);
+                    catch
+                    {
+                        ClosingEvents();
+                        break;
+                    }
                 }
             })).Start();
         }
@@ -218,7 +227,6 @@ namespace Igloo
         private static void Application_ApplicationExit(object sender, EventArgs e)
         {
             ILogger.AddToLog(ResourceInformation.ApplicationName, "Closing browser through application exit."); Console.WriteLine("Closing application");
-            ClosingEvents();
         }
 
         #endregion
@@ -230,9 +238,22 @@ namespace Igloo
         /// </summary>
         private static void ClosingEvents()
         {
-            Settings.Settings.downloadItem.SaveDownloadItems();
-            Settings.SettingsManager.SaveValues();
-            localServer.StopServer();
+            try
+            {
+                ILogger.AddToLog(ResourceInformation.ApplicationName, "Initializing Closing Events...");
+                Settings.Settings.downloadItem.SaveDownloadItems();
+                ILogger.AddToLog(ResourceInformation.ApplicationName, "Finish saving download items.");
+                Settings.SettingsManager.SaveValues();
+                ILogger.AddToLog(ResourceInformation.ApplicationName, "Finished saving setting values.");
+                localServer.StopServer();
+                ILogger.AddToLog(ResourceInformation.ApplicationName, "Stopped local server.");
+            }
+            catch (Exception e)
+            {
+                ILogger.AddToLog(ResourceInformation.ApplicationName, "Error : " + e.Message);
+                ILogger.AddToLog(ResourceInformation.ApplicationName, "Stack : " + e.StackTrace);
+            }
+
             ILogger.WriteLog();
             IHistory.WriteHistory();
             Environment.Exit(0);

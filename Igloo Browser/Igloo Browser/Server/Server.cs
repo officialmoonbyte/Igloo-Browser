@@ -74,17 +74,7 @@ namespace Igloo.Server
         public void StopServer()
         {
             ILogger.AddToLog("TCP Server", "Closing server... Please wait!");
-            try 
-            {
-                ILogger.AddToLog("TCP Server", "Stopping listening on TCP server");
-
-                ServerListener.Server.Close(0);
-                ServerListener.Stop();
-            } catch (Exception e) { ILogger.AddToLog(ResourceInformation.ApplicationName, "Failed to shutdown server!"); ILogger.LogException(e); }
-            finally
-            {
-                ILogger.AddToLog("Tcp Server", "Sucessfully closed server.");
-            } 
+            ServerListener.Server.Close();
         }
     }
 }

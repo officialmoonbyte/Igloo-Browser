@@ -55,20 +55,12 @@ namespace Igloo.Connection
 
         public static void InitializeServerConnections()
         {
-            ILogger.AddToLog("INFO", "Authorized request to validate and initialize server connections.");
             string ServerIp = "indiegoat.us";
+
             string ExternalIP = ManagedResources.GetExternalIP();
             string IndieGoatIP = ManagedResources.GetIndiegoatIP();
             ILogger.AddToLog("INFO", "Found both External and Indie Goat IP. External : " + ExternalIP + ", IndieGoat : " + IndieGoatIP + ".");
             if (ExternalIP == IndieGoatIP) { ServerIp = "192.168.0.16"; ILogger.AddToLog("WARN", "Changed to a IndieGoat localized IP! This may accure if you are connected locally to the IndieGoat Universal Server. Network issues may be apparent."); }
-            int UniversalServerPort = 0;
-            if (SettingsManager.UniversalUsername != null) { UniversalServerPort = ManagedResources.GetServerPort(ManagedResources.PortServers.VSLoginServer); }
-            else { UniversalServerPort = ManagedResources.GetServerPort(ManagedResources.PortServers.IglooBrowser); }
-            ILogger.AddToLog("INFO", "Set the Universal Server IP to : " + UniversalServerPort);
-
-            ManagedResources.Client.ConnectToRemoteServer(new UniversalConnectionObject(ServerIp, UniversalServerPort));
-            if (ManagedResources.Client.Client.Connected) { ILogger.AddToLog("INFO", "Sucessfully connected to UniversalServer."); }
-            else { ILogger.AddToLog("WARN", "Failed to connect to UniversalServer"); }
 
             ManagedResources.Updater = new UniversalServiceUpdater(); ILogger.AddToLog("INFO", "Initialized Service Updater, entering update loop");
             while (true)
@@ -76,20 +68,9 @@ namespace Igloo.Connection
                 if (ManagedResources.Updater.CheckUniversalAPI()) break;
             }
             ILogger.AddToLog("INFO", "Finished checking UniversalAPI install");
-            ManagedResources.Updater.CheckUpdate(ServerIp, ManagedResources.GetServerPort(ManagedResources.PortServers.VSLoginServer));
+            ManagedResources.Updater.CheckUpdate(ServerIp, 7878);
             ILogger.AddToLog("INFO", "Finished checking for update.");
             ILogger.AddToLog("INFO", "Done initializing network connections.");
-        }
-
-        #endregion
-
-        #region History
-
-        public static void SyncHistory()
-        {
-            string ServerHistory = null;
-
-            IHistory.LoadFromString(ServerHistory);
         }
 
         #endregion
