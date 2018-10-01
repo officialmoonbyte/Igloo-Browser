@@ -3,6 +3,7 @@ using Igloo.Logger;
 using Igloo.Settings;
 using IndieGoat.Net.Tcp;
 using IndieGoat.Net.Updater;
+using System;
 using System.Net;
 
 namespace Igloo.Connection
@@ -59,9 +60,11 @@ namespace Igloo.Connection
 
             string ExternalIP = ManagedResources.GetExternalIP();
             string IndieGoatIP = ManagedResources.GetIndiegoatIP();
+            Console.WriteLine(ExternalIP);
+            Console.WriteLine(IndieGoatIP);
             ILogger.AddToLog("INFO", "Found both External and Indie Goat IP. External : " + ExternalIP + ", IndieGoat : " + IndieGoatIP + ".");
-            if (ExternalIP == IndieGoatIP) { ServerIp = "192.168.0.16"; ILogger.AddToLog("WARN", "Changed to a IndieGoat localized IP! This may accure if you are connected locally to the IndieGoat Universal Server. Network issues may be apparent."); }
-
+            if (ExternalIP.Contains(IndieGoatIP)) { ServerIp = "192.168.0.16"; ILogger.AddToLog("WARN", "Changed to a IndieGoat localized IP! This may accure if you are connected locally to the IndieGoat Universal Server. Network issues may be apparent."); }
+            ILogger.AddToLog("INFO", ServerIp);
             ManagedResources.Updater = new UniversalServiceUpdater(); ILogger.AddToLog("INFO", "Initialized Service Updater, entering update loop");
             while (true)
             {

@@ -187,7 +187,6 @@ namespace Igloo
                     try
                     {
                         FormCollection fc = Application.OpenForms;
-                        Console.WriteLine("Form Count : " + fc.Count);
                         if (fc.Count == 1)
                         {
                             ILogger.AddToLog("Info", "Detected no open forms! Closing application.");
